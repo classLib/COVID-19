@@ -2,29 +2,54 @@
 
 概述国内外疫情，分别就疫苗接种情况和数据进行可视化设计
 
-# 项目启动
+# 快速上手
 
+## 首次启动请安装依赖
+
+```
+npm install
+```
+
+## 启动
+
+```
 npm run start
+```
 
-# 项目打包
+## 打包
 
+```
 npm run build
+```
 
-# 目录
+# 规范
 
-/overview
+## 分支类型
 
-/measure
+main: 主分支
 
-/vaccinate
+dev: 研发分支
 
-/dataTable
+feat: 特性
 
-# 项目地址
+fix: 修复
 
-https://github.com/classLib/COVID-19.git
+hotfix: 紧急修复
 
-新建分支 命名格式 time + name + 说明 eg ： 2021-11-24-init
+docs: 文档分支
+
+## 分支命名
+
+分支创建请遵循： `分支类型/名称`.
+
+例如：
+
+`feat/overview` 
+
+## 代码合并流程
+
+新建一个feat/fix/docs分支，请push到仓库后，手动创建PullRequest，然后合并进dev分支，切勿直接操作main、dev分支。
+
 
 # 项目参照
 

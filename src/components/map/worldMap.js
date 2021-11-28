@@ -100,8 +100,6 @@ export default class WorldMap {
         // 在一个指定的时间所有国家的信息
         console.log(this.targetData);
         // 用国家代码和国家名称作为键，国家信息作为值
-
-        // key 是国家代码，值是国家信息
         this.mapByCode = new Map();
         // key 是国家名称，值是国家信息
         this.mapByName = new Map();

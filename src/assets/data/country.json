@@ -1,0 +1,980 @@
+[{
+    "code": "AF",
+    "enName": "Afghanistan",
+    "zhName": "阿富汗"
+}, {
+    "code": "AL",
+    "enName": "Albania",
+    "zhName": "阿尔巴尼亚"
+}, {
+    "code": "DZ",
+    "enName": "Algeria",
+    "zhName": "阿尔及利亚"
+}, {
+    "code": "AD",
+    "enName": "Andorra",
+    "zhName": "安道尔"
+}, {
+    "code": "AO",
+    "enName": "Angola",
+    "zhName": "安哥拉"
+}, {
+    "code": "AI",
+    "enName": "Anguilla",
+    "zhName": "安圭拉"
+}, {
+    "code": "AG",
+    "enName": "Antigua and Barbuda",
+    "zhName": "安提瓜和巴布达岛"
+}, {
+    "code": "AE",
+    "enName": "Arab Emirates",
+    "zhName": "阿联酋"
+}, {
+    "code": "AR",
+    "enName": "Argentina",
+    "zhName": "阿根廷"
+}, {
+    "code": "AM",
+    "enName": "Armenia",
+    "zhName": "亚美尼亚"
+}, {
+    "code": "AW",
+    "enName": "Aruba",
+    "zhName": "阿鲁巴"
+}, {
+    "code": "AU",
+    "enName": "Australia",
+    "zhName": "澳大利亚"
+}, {
+    "code": "AT",
+    "enName": "Austria",
+    "zhName": "奥地利"
+}, {
+    "code": "AZ",
+    "enName": "Azerbaijan",
+    "zhName": "阿塞拜疆"
+}, {
+    "code": "BS",
+    "enName": "Bahamas",
+    "zhName": "巴哈马"
+}, {
+    "code": "BH",
+    "enName": "Bahrain",
+    "zhName": "巴林"
+}, {
+    "code": "BD",
+    "enName": "Bangladesh",
+    "zhName": "孟加拉国"
+}, {
+    "code": "BB",
+    "enName": "Barbados",
+    "zhName": "巴巴多斯"
+}, {
+    "code": "BY",
+    "enName": "Belarus",
+    "zhName": "白俄罗斯"
+}, {
+    "code": "BE",
+    "enName": "Belgium",
+    "zhName": "比利时"
+}, {
+    "code": "BZ",
+    "enName": "Belize",
+    "zhName": "伯利兹"
+}, {
+    "code": "BJ",
+    "enName": "Benin",
+    "zhName": "贝宁"
+}, {
+    "code": "BM",
+    "enName": "Bermuda",
+    "zhName": "百慕大群岛"
+}, {
+    "code": "BT",
+    "enName": "Bhutan",
+    "zhName": "不丹"
+}, {
+    "code": "BO",
+    "enName": "Bolivia",
+    "zhName": "玻利维亚"
+}, {
+    "code": "BQ",
+    "enName": "Bonaire, Saint Eustatius, and Saba",
+    "zhName": "博内尔岛 Saint Eustatius Saba"
+}, {
+    "code": "BIH",
+    "enName": "Bosnia and Herzegovina",
+    "zhName": "Bosnia和Herzegovina"
+}, {
+    "code": "BW",
+    "enName": "Botswana",
+    "zhName": "博茨瓦纳"
+}, {
+    "code": "BL",
+    "enName": "Saint Barthélemy",
+    "zhName": "圣巴托洛缪岛"
+}, {
+    "code": "BV",
+    "enName": "Bouvet Island",
+    "zhName": "布维岛"
+}, {
+    "code": "BR",
+    "enName": "Brazil",
+    "zhName": "巴西"
+}, {
+    "code": "BN",
+    "enName": "Brunei",
+    "zhName": "文莱"
+}, {
+    "code": "BG",
+    "enName": "Bulgaria",
+    "zhName": "保加利亚"
+}, {
+    "code": "BF",
+    "enName": "Burkina Faso",
+    "zhName": "布基纳法索"
+}, {
+    "code": "BI",
+    "enName": "Burundi",
+    "zhName": "布隆迪"
+}, {
+    "code": "KH",
+    "enName": "Cambodia",
+    "zhName": "柬埔寨"
+}, {
+    "code": "CM",
+    "enName": "Cameroon",
+    "zhName": "喀麦隆"
+}, {
+    "code": "CA",
+    "enName": "Canada",
+    "zhName": "加拿大"
+}, {
+    "code": "CV",
+    "enName": "Cape Verde",
+    "zhName": "佛得角"
+}, {
+    "code": "KY",
+    "enName": "Cayman Islands",
+    "zhName": "开曼群岛"
+}, {
+    "code": "CF",
+    "enName": "Central African Republic",
+    "zhName": "中非共和国"
+}, {
+    "code": "TD",
+    "enName": "Chad",
+    "zhName": "乍得"
+}, {
+    "code": "CL",
+    "enName": "Chile",
+    "zhName": "智利"
+}, {
+    "code": "HK",
+    "enName": "China, Hong Kong S.A.R.",
+    "zhName": "香港"
+}, {
+    "code": "CN",
+    "enName": "China, the People's Republic of China (PRC)",
+    "zhName": "中国"
+}, {
+    "code": "CC",
+    "enName": "Cocos Islands",
+    "zhName": "科科斯群岛"
+}, {
+    "code": "CO",
+    "enName": "Colombia",
+    "zhName": "哥伦比亚"
+}, {
+    "code": "KM",
+    "enName": "Comoros",
+    "zhName": "科摩罗"
+}, {
+    "code": "CG",
+    "enName": "Congo",
+    "zhName": "刚果"
+}, {
+    "code": "CD",
+    "enName": "Congo, Democratic Republic of the Congo",
+    "zhName": "刚果民主共和国"
+}, {
+    "code": "CK",
+    "enName": "Cook Islands",
+    "zhName": "库克群岛"
+}, {
+    "code": "CR",
+    "enName": "Costa Rica",
+    "zhName": "哥斯达黎加"
+}, {
+    "code": "HR",
+    "enName": "Croatia",
+    "zhName": "克罗地亚"
+}, {
+    "code": "CU",
+    "enName": "Cuba",
+    "zhName": "古巴"
+}, {
+    "code": "CW",
+    "enName": "Curacao",
+    "zhName": "库拉索岛"
+}, {
+    "code": "CY",
+    "enName": "Cyprus",
+    "zhName": "塞浦路斯"
+}, {
+    "code": "CZ",
+    "enName": "Czech Republic",
+    "zhName": "捷克共和国"
+}, {
+    "code": "CS",
+    "enName": "Czechoslovakia",
+    "zhName": "捷克斯洛伐克"
+}, {
+    "code": "DK",
+    "enName": "Denmark",
+    "zhName": "丹麦"
+}, {
+    "code": "DJ",
+    "enName": "Djibouti",
+    "zhName": "吉布提"
+}, {
+    "code": "DM",
+    "enName": "Dominica",
+    "zhName": "多米尼加"
+}, {
+    "code": "DO",
+    "enName": "Dominican Republic",
+    "zhName": "多明尼加共和国"
+}, {
+    "code": "EC",
+    "enName": "Ecuador",
+    "zhName": "厄瓜多尔"
+}, {
+    "code": "EG",
+    "enName": "Egypt",
+    "zhName": "埃及"
+}, {
+    "code": "SV",
+    "enName": "El Salvador",
+    "zhName": "萨尔瓦多"
+}, {
+    "code": "GQ",
+    "enName": "Equatorial Guinea",
+    "zhName": "赤道几内亚"
+}, {
+    "code": "ER",
+    "enName": "Eritrea",
+    "zhName": "厄立特里亚"
+}, {
+    "code": "EE",
+    "enName": "Estonia",
+    "zhName": "爱沙尼亚"
+}, {
+    "code": "ET",
+    "enName": "Ethiopia",
+    "zhName": "埃塞俄比亚"
+}, {
+    "code": "FK",
+    "enName": "Falkland Islands (Malvinas)",
+    "zhName": "福克兰群岛（Malvinas）"
+}, {
+    "code": "FO",
+    "enName": "Faroe Islands",
+    "zhName": "法罗群岛"
+}, {
+    "code": "FJ",
+    "enName": "Fiji",
+    "zhName": "斐济"
+}, {
+    "code": "FI",
+    "enName": "Finland",
+    "zhName": "芬兰"
+}, {
+    "code": "FR",
+    "enName": "France",
+    "zhName": "法国"
+}, {
+    "code": "GF",
+    "enName": "French Guiana",
+    "zhName": "法属圭亚那"
+}, {
+    "code": "PF",
+    "enName": "French Polynesia",
+    "zhName": "法属波利尼西亚"
+}, {
+    "code": "GA",
+    "enName": "Gabon",
+    "zhName": "加蓬"
+}, {
+    "code": "GM",
+    "enName": "Gambia",
+    "zhName": "冈比亚"
+}, {
+    "code": "GE",
+    "enName": "Georgia Republic of Georgia",
+    "zhName": "格鲁吉亚共和国"
+}, {
+    "code": "DD",
+    "enName": "German Democratic Republic",
+    "zhName": "德意志民主共和国"
+}, {
+    "code": "DE",
+    "enName": "Germany",
+    "zhName": "德国"
+}, {
+    "code": "GH",
+    "enName": "Ghana",
+    "zhName": "加纳"
+}, {
+    "code": "GI",
+    "enName": "Gibraltar",
+    "zhName": "直布罗陀"
+}, {
+    "code": "GR",
+    "enName": "Greece",
+    "zhName": "希腊"
+}, {
+    "code": "GL",
+    "enName": "Greenland",
+    "zhName": "格陵兰岛"
+}, {
+    "code": "GD",
+    "enName": "Grenada",
+    "zhName": "格林纳达"
+}, {
+    "code": "GP",
+    "enName": "Guadeloupe",
+    "zhName": "瓜德罗普岛"
+}, {
+    "code": "GT",
+    "enName": "Guatemala",
+    "zhName": "危地马拉"
+}, {
+    "code": "GG",
+    "enName": "Guernsey",
+    "zhName": "根西岛"
+}, {
+    "code": "GN",
+    "enName": "Guinea",
+    "zhName": "几内亚"
+}, {
+    "code": "GW",
+    "enName": "Guinea-Bissau",
+    "zhName": "几内亚比绍"
+}, {
+    "code": "GY",
+    "enName": "Guyana",
+    "zhName": "圭亚那"
+}, {
+    "code": "HT",
+    "enName": "Haiti",
+    "zhName": "海地"
+}, {
+    "code": "HN",
+    "enName": "Honduras",
+    "zhName": "洪都拉斯"
+}, {
+    "code": "HU",
+    "enName": "Hungary",
+    "zhName": "匈牙利"
+}, {
+    "code": "IS",
+    "enName": "Iceland",
+    "zhName": "冰岛"
+}, {
+    "code": "IN",
+    "enName": "India",
+    "zhName": "印度"
+}, {
+    "code": "ID",
+    "enName": "Indonesia",
+    "zhName": "印度尼西亚"
+}, {
+    "code": "IR",
+    "enName": "Iran",
+    "zhName": "伊朗"
+}, {
+    "code": "IQ",
+    "enName": "Iraq",
+    "zhName": "伊拉克"
+}, {
+    "code": "IE",
+    "enName": "Ireland",
+    "zhName": "爱尔兰"
+}, {
+    "code": "IM",
+    "enName": "Isle of Man",
+    "zhName": "马恩岛"
+}, {
+    "code": "IL",
+    "enName": "Israel",
+    "zhName": "以色列"
+}, {
+    "code": "IT",
+    "enName": "Italy",
+    "zhName": "意大利"
+}, {
+    "code": "CI",
+    "enName": "Ivory Coast",
+    "zhName": "象牙海岸"
+}, {
+    "code": "JM",
+    "enName": "Jamaica",
+    "zhName": "牙买加"
+}, {
+    "code": "JP",
+    "enName": "Japan",
+    "zhName": "日本"
+}, {
+    "code": "JE",
+    "enName": "Jersey",
+    "zhName": "泽西"
+}, {
+    "code": "JO",
+    "enName": "Jordan",
+    "zhName": "乔丹"
+}, {
+    "code": "KZ",
+    "enName": "Kazakhstan",
+    "zhName": "哈萨克斯坦"
+}, {
+    "code": "KE",
+    "enName": "Kenya",
+    "zhName": "肯尼亚"
+}, {
+    "code": "KI",
+    "enName": "Kiribati",
+    "zhName": "基里巴斯"
+}, {
+    "code": "KW",
+    "enName": "Kuwait",
+    "zhName": "科威特"
+}, {
+    "code": "KG",
+    "enName": "Kyrgyzstan",
+    "zhName": "吉尔吉斯斯坦"
+}, {
+    "code": "LA",
+    "enName": "Laos",
+    "zhName": "老挝"
+}, {
+    "code": "LV",
+    "enName": "Latvia",
+    "zhName": "拉脱维亚"
+}, {
+    "code": "LB",
+    "enName": "Lebanon",
+    "zhName": "黎巴嫩"
+}, {
+    "code": "LS",
+    "enName": "Lesotho",
+    "zhName": "莱索托"
+}, {
+    "code": "LR",
+    "enName": "Liberia",
+    "zhName": "利比里亚"
+}, {
+    "code": "LY",
+    "enName": "Libya",
+    "zhName": "利比亚"
+}, {
+    "code": "LI",
+    "enName": "Liechtenstein",
+    "zhName": "列支敦士登"
+}, {
+    "code": "LT",
+    "enName": "Lithuania",
+    "zhName": "立陶宛"
+}, {
+    "code": "LU",
+    "enName": "Luxembourg",
+    "zhName": "卢森堡"
+}, {
+    "code": "MO",
+    "enName": "Macau",
+    "zhName": "澳门"
+}, {
+    "code": "MK",
+    "enName": "Macedonia (Former Yugoslav Republic)",
+    "zhName": "马其顿（前南斯拉夫共和国）"
+}, {
+    "code": "MG",
+    "enName": "Madagascar",
+    "zhName": "马达加斯加"
+}, {
+    "code": "MW",
+    "enName": "Malawi",
+    "zhName": "马拉维"
+}, {
+    "code": "MY",
+    "enName": "Malaysia",
+    "zhName": "马来西亚"
+}, {
+    "code": "MV",
+    "enName": "Maldives",
+    "zhName": "马尔代夫"
+}, {
+    "code": "ML",
+    "enName": "Mali",
+    "zhName": "马里"
+}, {
+    "code": "MT",
+    "enName": "Malta",
+    "zhName": "马耳他"
+}, {
+    "code": "MH",
+    "enName": "Marshall Islands",
+    "zhName": "马绍尔群岛"
+}, {
+    "code": "MQ",
+    "enName": "Martinique",
+    "zhName": "马提尼克"
+}, {
+    "code": "MR",
+    "enName": "Mauritania",
+    "zhName": "毛里塔尼亚"
+}, {
+    "code": "MU",
+    "enName": "Mauritius",
+    "zhName": "毛里求斯"
+}, {
+    "code": "MX",
+    "enName": "Mexico",
+    "zhName": "墨西哥"
+}, {
+    "code": "MD",
+    "enName": "Moldova Republic of Moldova",
+    "zhName": "摩尔多瓦共和国"
+}, {
+    "code": "MC",
+    "enName": "Monaco",
+    "zhName": "摩纳哥"
+}, {
+    "code": "MN",
+    "enName": "Mongolia",
+    "zhName": "蒙古"
+}, {
+    "code": "ME",
+    "enName": "Montenegro",
+    "zhName": "黑山"
+}, {
+    "code": "MS",
+    "enName": "Montserrat",
+    "zhName": "蒙特塞拉特岛"
+}, {
+    "code": "MA",
+    "enName": "Morocco",
+    "zhName": "摩洛哥"
+}, {
+    "code": "MF",
+    "enName": "Saint Martin",
+    "zhName": "圣马丁岛"
+}, {
+    "code": "MZ",
+    "enName": "Mozambique",
+    "zhName": "莫桑比克"
+}, {
+    "code": "MM",
+    "enName": "Myanmar",
+    "zhName": "缅甸"
+}, {
+    "code": "NA",
+    "enName": "Namibia",
+    "zhName": "纳米比亚"
+}, {
+    "code": "NR",
+    "enName": "Nauru",
+    "zhName": "瑙鲁"
+}, {
+    "code": "NP",
+    "enName": "Nepal",
+    "zhName": "尼泊尔"
+}, {
+    "code": "NL",
+    "enName": "Netherlands",
+    "zhName": "荷兰"
+}, {
+    "code": "AN",
+    "enName": "Netherlands Antilles",
+    "zhName": "荷属安的列斯群岛"
+}, {
+    "code": "NC",
+    "enName": "New Caledonia",
+    "zhName": "新喀里多尼亚"
+}, {
+    "code": "PG",
+    "enName": "New Guinea",
+    "zhName": "新几内亚"
+}, {
+    "code": "NZ",
+    "enName": "New Zealand",
+    "zhName": "新西兰"
+}, {
+    "code": "NI",
+    "enName": "Nicaragua",
+    "zhName": "尼加拉瓜"
+}, {
+    "code": "NE",
+    "enName": "Niger",
+    "zhName": "尼日尔"
+}, {
+    "code": "NG",
+    "enName": "Nigeria",
+    "zhName": "尼日利亚"
+}, {
+    "code": "NF",
+    "enName": "Norfolk Island",
+    "zhName": "诺福克岛"
+}, {
+    "code": "KP",
+    "enName": "North Korea",
+    "zhName": "朝鲜"
+}, {
+    "code": "MP",
+    "enName": "Northern Mariana Islands",
+    "zhName": "北马里亚纳群岛"
+}, {
+    "code": "NO",
+    "enName": "Norway",
+    "zhName": "挪威"
+}, {
+    "code": "OM",
+    "enName": "Oman",
+    "zhName": "阿曼"
+}, {
+    "code": "PK",
+    "enName": "Pakistan",
+    "zhName": "巴基斯坦"
+}, {
+    "code": "PW",
+    "enName": "Palau",
+    "zhName": "帕劳"
+}, {
+    "code": "PM",
+    "enName": "Saint Pierre and Miquelon",
+    "zhName": "圣皮埃尔岛和密克隆岛"
+}, {
+    "code": "PA",
+    "enName": "Panama",
+    "zhName": "巴拿马"
+}, {
+    "code": "PNG",
+    "enName": "Papua New Guinea",
+    "zhName": "巴布亚新几内亚"
+}, {
+    "code": "PY",
+    "enName": "Paraguay",
+    "zhName": "巴拉圭"
+}, {
+    "code": "PE",
+    "enName": "Peru",
+    "zhName": "秘鲁"
+}, {
+    "code": "PH",
+    "enName": "Philippines",
+    "zhName": "菲律宾"
+}, {
+    "code": "PL",
+    "enName": "Poland",
+    "zhName": "波兰"
+}, {
+    "code": "PT",
+    "enName": "Portugal",
+    "zhName": "葡萄牙"
+}, {
+    "code": "QA",
+    "enName": "Qatar",
+    "zhName": "卡塔尔"
+}, {
+    "code": "RH",
+    "enName": "Rhodesia",
+    "zhName": "罗得西亚"
+}, {
+    "code": "RO",
+    "enName": "Romania",
+    "zhName": "罗马尼亚"
+}, {
+    "code": "RU",
+    "enName": "Russian Federation",
+    "zhName": "俄罗斯联邦"
+}, {
+    "code": "RW",
+    "enName": "Rwanda",
+    "zhName": "卢旺达"
+}, {
+    "code": "SH",
+    "enName": "Saint Helena, Ascension, and Tristan da Cunha",
+    "zhName": "Saint Helena 阿森松岛和Tristan da Cunha"
+}, {
+    "code": "KN",
+    "enName": "Saint Kitts and Nevis",
+    "zhName": "Saint Kitts和尼维斯"
+}, {
+    "code": "WS",
+    "enName": "Samoa",
+    "zhName": "萨摩亚"
+}, {
+    "code": "SM",
+    "enName": "San Marino",
+    "zhName": "圣马力诺"
+}, {
+    "code": "ST",
+    "enName": "Sao Tome and Principe",
+    "zhName": "圣多美和普林西比"
+}, {
+    "code": "SA",
+    "enName": "Saudi Arabia",
+    "zhName": "沙特阿拉伯"
+}, {
+    "code": "SN",
+    "enName": "Senegal",
+    "zhName": "塞内加尔"
+}, {
+    "code": "RS",
+    "enName": "Serbia",
+    "zhName": "塞尔维亚"
+}, {
+    "code": "SC",
+    "enName": "Seychelles",
+    "zhName": "塞舌尔"
+}, {
+    "code": "SL",
+    "enName": "Sierra Leone",
+    "zhName": "塞拉利昂"
+}, {
+    "code": "SG",
+    "enName": "Singapore",
+    "zhName": "新加坡"
+}, {
+    "code": "SX",
+    "enName": "Sint Maarten (Dutch part)",
+    "zhName": "Sint Maarten（荷兰语的部分）"
+}, {
+    "code": "SK",
+    "enName": "Slovakia",
+    "zhName": "斯洛伐克"
+}, {
+    "code": "SI",
+    "enName": "Slovenia",
+    "zhName": "斯洛文尼亚"
+}, {
+    "code": "SB",
+    "enName": "Solomon Islands",
+    "zhName": "所罗门群岛"
+}, {
+    "code": "SO",
+    "enName": "Somalia",
+    "zhName": "索马里"
+}, {
+    "code": "ZA",
+    "enName": "South Africa",
+    "zhName": "南非"
+}, {
+    "code": "GS",
+    "enName": "South Georgia and the South Sandwich Islands",
+    "zhName": "南乔治亚岛和南威奇群岛"
+}, {
+    "code": "KR",
+    "enName": "South Korea",
+    "zhName": "韩国"
+}, {
+    "code": "ES",
+    "enName": "Spain",
+    "zhName": "西班牙"
+}, {
+    "code": "LK",
+    "enName": "Sri Lanka",
+    "zhName": "斯里兰卡"
+}, {
+    "code": "LC",
+    "enName": "St. Lucia",
+    "zhName": "圣露西亚"
+}, {
+    "code": "VC",
+    "enName": "St. Vincent and the Grenadines",
+    "zhName": "圣文森特和格林纳丁斯"
+}, {
+    "code": "SD",
+    "enName": "Sudan",
+    "zhName": "苏丹"
+}, {
+    "code": "SR",
+    "enName": "Suriname",
+    "zhName": "苏里南"
+}, {
+    "code": "SZ",
+    "enName": "Swaziland",
+    "zhName": "斯威士兰"
+}, {
+    "code": "SE",
+    "enName": "Sweden",
+    "zhName": "瑞典"
+}, {
+    "code": "CH",
+    "enName": "Switzerland",
+    "zhName": "瑞士"
+}, {
+    "code": "SY",
+    "enName": "Syria",
+    "zhName": "叙利亚"
+}, {
+    "code": "TW",
+    "enName": "Taiwan",
+    "zhName": "台湾"
+}, {
+    "code": "TJ",
+    "enName": "Tajikistan",
+    "zhName": "塔吉克斯坦"
+}, {
+    "code": "TZ",
+    "enName": "Tanzania",
+    "zhName": "坦桑尼亚"
+}, {
+    "code": "TH",
+    "enName": "Thailand",
+    "zhName": "泰国"
+}, {
+    "code": "TL",
+    "enName": "Timor-Leste",
+    "zhName": "东帝汶"
+}, {
+    "code": "TG",
+    "enName": "Togo",
+    "zhName": "多哥"
+}, {
+    "code": "TO",
+    "enName": "Tonga",
+    "zhName": "汤加"
+}, {
+    "code": "TT",
+    "enName": "Trinidad and Tobago",
+    "zhName": "特立尼达和多巴哥"
+}, {
+    "code": "TN",
+    "enName": "Tunisia",
+    "zhName": "突尼斯"
+}, {
+    "code": "TR",
+    "enName": "Turkey",
+    "zhName": "土耳其"
+}, {
+    "code": "TM",
+    "enName": "Turkmenistan",
+    "zhName": "土库曼斯坦"
+}, {
+    "code": "TC",
+    "enName": "Turks and Caicos Islands",
+    "zhName": "土耳其和凯科斯群岛"
+}, {
+    "code": "TV",
+    "enName": "Tuvalu",
+    "zhName": "图瓦卢"
+}, {
+    "code": "SU",
+    "enName": "USSR",
+    "zhName": "苏联"
+}, {
+    "code": "UG",
+    "enName": "Uganda",
+    "zhName": "乌干达"
+}, {
+    "code": "UA",
+    "enName": "Ukraine",
+    "zhName": "乌克兰"
+}, {
+    "code": "GB",
+    "enName": "United Kingdom",
+    "zhName": "大不列颠联合王国"
+}, {
+    "code": "US",
+    "enName": "United States of America",
+    "zhName": "美利坚合众国"
+}, {
+    "code": "UY",
+    "enName": "Uruguay",
+    "zhName": "乌拉圭"
+}, {
+    "code": "UZ",
+    "enName": "Uzbekistan",
+    "zhName": "乌兹别克斯坦"
+}, {
+    "code": "VU",
+    "enName": "Vanuatu (New Hebrides)",
+    "zhName": "瓦努阿图（新赫布里底群岛）"
+}, {
+    "code": "VA",
+    "enName": "Vatican City State (Holy See)",
+    "zhName": "梵蒂冈城国（圣见）"
+}, {
+    "code": "VE",
+    "enName": "Venezuela",
+    "zhName": "委内瑞拉"
+}, {
+    "code": "VN",
+    "enName": "Viet Nam",
+    "zhName": "越南"
+}, {
+    "code": "VG",
+    "enName": "Virgin (British) Islands",
+    "zhName": "英属群岛（英属）群岛"
+}, {
+    "code": "EH",
+    "enName": "Western Sahara",
+    "zhName": "西撒哈拉"
+}, {
+    "code": "YE",
+    "enName": "Yemen",
+    "zhName": "也门"
+}, {
+    "code": "YU",
+    "enName": "Yugoslavia",
+    "zhName": "南斯拉夫"
+}, {
+    "code": "ZM",
+    "enName": "Zambia",
+    "zhName": "赞比亚"
+}, {
+    "code": "ZW",
+    "enName": "Zimbabwe",
+    "zhName": "津巴布韦"
+}, {
+    "code": "RE",
+    "enName": "Réunion",
+    "zhName": "留尼汪岛"
+}, {
+    "code": "PR",
+    "enName": "Puerto Rico",
+    "zhName": "波多黎各自治邦"
+}, {
+    "code": "PS",
+    "enName": "occupied Palestinian territory including east Jerusalem",
+    "zhName": "巴勒斯坦被占领土（包括东耶路撒冷）"
+}, {
+    "code": "YT",
+    "enName": "Mayotte",
+    "zhName": "马约特岛"
+}, {
+    "code": "XK",
+    "enName": "Kosovo",
+    "zhName": "科索沃"
+}, {
+    "code": "GU",
+    "enName": "Guam",
+    "zhName": "关岛"
+}, {
+    "code": "BA",
+    "enName": "Bosnia and Herzegovina",
+    "zhName": "波斯尼亚和黑塞哥维那"
+} ,{
+    "code": "VI",
+    "enName": "The United States Virgin Islands",
+    "zhName": "美属维尔京群岛"
+} ,{
+    "code": "SS",
+    "enName": "South Sudan",
+    "zhName": "南苏丹共和国"
+}
+
+
+]

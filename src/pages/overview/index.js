@@ -9,6 +9,8 @@ import {
   select
 } from "d3-selection";
 
+import * as d3 from 'd3';
+
 import WorldMap from "../../components/map/worldMap";
 
 const create = async () => {
@@ -38,11 +40,6 @@ const create = async () => {
       // 5. 绘制地图
       // let worldMap = new WorldMap('worldMap', groupedByCountryDate, geo);
       // worldMap.setHistogram(histogram);
-
-      // // 6. 绘制气泡图
-      // let bubble = new Bubble('bubble', groupedByCountryDate);
-      // bubble.setHistogram(histogram);
-      // bubble.setWorldMap(worldMap);
 
     }).catch(error => {
       console.log(error);

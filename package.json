@@ -1,0 +1,37 @@
+{
+  "name": "covid-19",
+  "version": "1.0.0",
+  "description": "概述国内外疫情，分别就疫苗接种情况和数据进行可视化设计",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx webpack serve",
+    "watch": "npx webpack  --watch",
+    "build": "npx webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/classLib/COVID-19.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/classLib/COVID-19/issues"
+  },
+  "homepage": "https://github.com/classLib/COVID-19#readme",
+  "devDependencies": {
+    "css-loader": "^6.5.1",
+    "csv-loader": "^3.0.3",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "d3": "^7.1.1"
+  }
+}

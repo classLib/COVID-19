@@ -30,21 +30,17 @@ module.exports = {
     },
   },
   module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
+    rules: [{
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+    }, ],
   },
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "./src/assets"),
-          to: "./assets",
-        },
-      ],
+      patterns: [{
+        from: path.resolve(__dirname, "./src/assets"),
+        to: "./assets",
+      }, ],
     }),
     new HtmlWebpackPlugin({
       filename: "overview.html",

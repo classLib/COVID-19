@@ -1,0 +1,9 @@
+{
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.foldingImportsByDefault": true,
+  "editor.tabSize": 2
+}

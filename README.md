@@ -2,7 +2,25 @@
 
 概述国内外疫情，分别就疫苗接种情况和数据进行可视化设计
 
-# 项目地址 ：
+# 项目启动
+
+npm run start
+
+# 项目打包
+
+npm run build
+
+# 目录
+
+/overview
+
+/measure
+
+/vaccinate
+
+/dataTable
+
+# 项目地址
 
 https://github.com/classLib/COVID-19.git
 

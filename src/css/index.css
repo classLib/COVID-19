@@ -1,0 +1,11 @@
+#header-top{
+    height: 150px;
+    background-color: rgba(240, 240, 240, 0.507);
+}
+
+#header-left{
+    display: inline;
+}
+#header-right{
+    float: right;
+}

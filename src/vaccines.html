@@ -1,0 +1,65 @@
+<!-- 疫情页面 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>疫苗</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/vaccines.css">
+    <script src="../Resources/lib/d3.js"></script>
+</head>
+
+<body>
+    <div id="vaccines-box" class="mt-3 mx-1">
+        <div id="vaccines-left">
+            <h3>国家选择</h3>
+            <!-- <div id="select-county"></div> -->
+        </div>
+        <div id="vaccines-center"></div>
+        <div id="vaccines-right">
+            <div id="pie"></div>
+            <div id="rose"></div>
+        </div>
+    </div>
+    <script type="module">
+        import RadioSet from './js/vaccines/radioSet.js';
+        import Line from './js/vaccines/Line.js'
+        const initChart = async () => {
+            const vaccinationsData = await d3.csv(
+                '../Resources/data/vaccinations.csv'
+            );
+            const groupData = d3.groups(vaccinationsData, (d) => d["location"]);
+            // 绘制单选框集合
+            let radioSet = new RadioSet('vaccines-left',groupData);
+
+            // 绘制折线图
+            let lineInitData = groupData[0];
+            const lineData = {
+                'country':lineInitData[0],
+                'data':lineInitData[1]
+            }
+            let line = new Line('vaccines-center',lineData);
+            radioSet.setLine(line);
+            // 绘制饼图
+            let pieData = [];
+            let pie = new Pie('pie',pieData);
+        }
+        initChart();
+    </script>
+</body>
+
+</html>

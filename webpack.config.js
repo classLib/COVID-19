@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -14,11 +15,12 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
     clean: true,
   },
   devServer: {
     hot: true,
-    open: ["/overview.html"],
+    open: ["/dataTable.html"],
     static: "./dist",
     compress: false,
     port: 3000,
@@ -28,44 +30,32 @@ module.exports = {
     },
   },
   module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-      },
-      {
-        test: /\.(csv|tsv)$/i,
-        use: ["csv-loader"],
-      },
-      {
-        test: /\.xml$/i,
-        use: ["xml-loader"],
-      },
-    ],
+    rules: [{
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+    }, ],
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(__dirname, "./src/assets"),
+        to: "./assets",
+      }, ],
+    }),
     new HtmlWebpackPlugin({
       filename: "overview.html",
-      chunks: ["overview"],
       template: "./src/pages/overview/index.html",
     }),
     new HtmlWebpackPlugin({
       filename: "vaccinate.html",
-      chunks: ["vaccinate"],
       template: "./src/pages/vaccinate/index.html",
     }),
     new HtmlWebpackPlugin({
       filename: "dataTable.html",
-      chunks: ["dataTable"],
       template: "./src/pages/dataTable/index.html",
     }),
     new HtmlWebpackPlugin({
       filename: "measure.html",
-      chunks: ["measure"],
       template: "./src/pages/measure/index.html",
     }),
   ],

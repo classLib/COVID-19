@@ -157,8 +157,7 @@ export default class WorldMap {
     // 更新地图
     renderMap() {
         this.map = this.mg.selectAll('path')
-            // 绑定的数据是经过了路径生成器后生成的标准path数据
-            // 根据这个path进行画图
+
             .data(this.geoData.features)
             .join(
                 enter => enter.append('path')

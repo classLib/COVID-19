@@ -66,6 +66,14 @@ export default class WorldMap {
     initMapGroup() {
         this.mg = this.svg.append('g')
             .attr('id', 'mapGroup')
+        // 图例
+        this.tooltip = d3.select('body')
+            .append('div')
+            .style('position', 'absolute')
+            .style('z-index', '10')
+            .style('visibility', 'hidden')
+            .style('text-anchor', 'middle')
+            .text('')
     }
 
 
@@ -172,22 +180,20 @@ export default class WorldMap {
                     // // 展示国家数据   
                     let data = this.getDataByGeoData(d); //得到对应疫情数据
                     let name = this.getDataByGeoData(d)['Country']; //取得中文名
-
-                    // let con_country = d3.select("#country_info")
-                    //     .text(name)
-                    //     .style("left", (d3.event.pageX) + "px")
-                    //     .style("top", (d3.event.pageY + 20) + "px")
-                    //     .style("opacity", 0.5)
-                    //     .style("font-weight", 900)
-                    //     .transition(this.transition)
-
-
+                    this.tooltip.style('visibility', 'visible')
+                        .style("left", (event.pageX) + "px")
+                        .style("top", (event.pageY + 20) + "px")
+                        .style("opacity", 0.8)
+                        .style("font-weight", 900)
+                        .style('font-size', '1rem')
+                        .style('font-weight', 900)
+                        .text(name)
+                        .transition(this.transition)
                 })
                 .on('mouseout', (event) => {
                     event.target.style['fill-opacity'] = '0.8';
                     event.target.style['stroke'] = 'white';
-                    // let temp_country = d3.select("#country_info")
-                    //     .style("opacity", 0)
+                    this.tooltip.style('visibility', 'hidden')
                 })
                 // 得到对应的数据集
                 ,

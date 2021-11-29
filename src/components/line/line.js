@@ -9,7 +9,10 @@ export default class Line {
         this.svg = null;
         this.mg = null;
         this.color = null;
+        this.targetDataIndex = null;
+        this.duration = 250;
         this.targetDataType = "daily_vaccinations";
+        this.dataAll = null;
 
         this.width = document.querySelector(`#${this.id}`).offsetWidth;
         this.height = document.querySelector(`#${this.id}`).offsetHeight;
@@ -21,7 +24,7 @@ export default class Line {
         this.margin = {
             top: 50,
             right: 50,
-            bottom: 130,
+            bottom: 70,
             left: 40
         };
         this.init();//初始化画布
@@ -41,6 +44,8 @@ export default class Line {
         this.rectGroup = this.mg.append('g').attr('class', 'rect-group');
     }
     initSvg() {
+        this.name = d3.select(`#${this.id}`).append("div");
+        this.rangeBox = d3.select(`#${this.id}`).append("div").attr("class", "range-box");
         this.svg = d3.select(`#${this.id}`)
             .append('svg');
         // 响应式盒子
@@ -115,13 +120,125 @@ export default class Line {
         if (data) this.data = data;
         this.countryName = this.data.country;
         this.dataCountry = this.data.data;
+        this.dataAll = this.dataCountry;
         this.color = this.initColor();
+        this.renderInputControl();
+        this.initInputControlEvent();
+        this.renderRectBox();
+
+    }
+    renderRectBox(data) {
+        if (data) this.data = data;
+        this.countryName = this.data.country;
+        this.dataCountry = this.data.data;
         this.renderScale();
         this.renderAxis();
         this.renderRect();
-        // this.renderLine();
+    }
+    renderInputControl() {
+        this.name.text(this.countryName)
+        // div容器
+        this.inputControl = this.rangeBox
+            .style("display", "flex")
+        // 控制按钮
+        this.playShowBtn = this.inputControl
+            .selectAll("button")
+            .data([1])
+            .join("button")
+            // .style("background-color", "steelblue")
+            .style("cursor", "pointer")
+            .attr("type", "button")
+            .style('width', '100px')
+            .attr("class", "btn_center")
+            .text("Play")
+
+        // 范围选择
+        this.rangeInput = this.inputControl
+            .selectAll("input")
+            .data([1])
+            .join("input")
+            .attr("id", "rangeInput")
+            .style('text-align', 'middle')
+            // 可以滑动范围的一种框，规定范围
+            .attr('type', 'range')
+            .attr("min", 0)
+            .attr("max", this.dataCountry.length - 1)
+            // 让初始值为0
+            .property('value', 0);
+        // 时间控制
+        this.rangeOutput = this.inputControl
+            .selectAll('output')
+            .data([1])
+            .join("output")
+            .attr('id', 'rangeOutput')
+            .text(this.dataCountry[this.dataCountry.length - 1]['date']);
+
     }
 
+    initInputControlEvent() {
+        // 1. 监听选择框
+        //改变视图
+        this.rangeInput.on("change", (e) => {
+            let index = d3.select(e.target).property("value");
+            this.targetDataIndex = index;
+            // 改变outinput
+            this.rangeOutput.text(this.dataAll[index].date);
+            // 更新视图
+            this.renderRectBox({
+                "countryname": this.countryName,
+                "data": this.dataAll.slice(0, index)
+            })
+        });
+
+        // 只是改变了时间，不变视图
+        this.rangeInput.on('input', (e) => {
+            let index = d3.select(e.target).property('value');
+            this.rangeOutput.text(this.dataAll[index].key);
+        });
+
+        // 2. 监听按钮的播放和暂停
+        this.playShowBtn.on("click", (e) => {
+            // 如果是play按钮，就按时间进行变化
+            if (e.target.textContent === "Play") {
+                e.target.textContent = "Pause";
+                this.play();
+            } else {
+                // 如果是暂停按钮，就暂停事件
+                e.target.textContent = "Play";
+                this.pause();
+            }
+
+        })
+    }
+
+    play() {
+        this.interval = setInterval(() => {
+            // 默认数据的时间下标进行增加
+            if (++this.targetDataIndex === this.dataAll.length) {
+                this.playShowBtn.text("Play")
+                this.pause();
+                return;
+            }
+            console.log(this.targetDataIndex);
+            // 修改默认的下标并且更改对应的时间的国家数据
+            // this.setTargetDataIndex(this.targetDataIndex);
+            // //更新input框
+            this.rangeInput.property("value", this.targetDataIndex);
+            // //更新output框
+            this.rangeOutput.text(this.dataAll[this.targetDataIndex].date);
+            this.renderRectBox(
+                {
+                    "countryname": this.countryName,
+                    "data": this.dataAll.slice(0, this.targetDataIndex)
+                }
+            );//更新图表
+        }, 250)
+    }
+    pause() {
+        // setInterval的返回值传给clearInterval用来暂停计时器
+        clearInterval(this.interval);
+
+    }
     renderRect() {
         this.rectGroup.selectAll('rect')
             .data(this.dataCountry)

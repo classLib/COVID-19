@@ -12,6 +12,7 @@ import {
 import * as d3 from 'd3';
 
 import WorldMap from "../../components/map/worldMap";
+import Bar from "../../components/bar/bar"
 
 
 index();
@@ -31,9 +32,13 @@ async function index() {
     key,
     values
   }))
-  console.log(groupedByCountryDate)
-  console.log(groupedByCountryName)
+  // console.log(groupedByCountryDate)
+  // console.log(groupedByCountryName)
+  // 绘制柱状图
+  let bar = new Bar('bar', groupedByCountryName);
+  // 绘制地图
   let worldGeo = new WorldMap("worldMap", groupedByCountryDate, g)
+  worldGeo.setBar(bar);
 
 
 

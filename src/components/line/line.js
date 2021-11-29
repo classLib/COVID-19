@@ -24,7 +24,7 @@ export default class Line {
         this.margin = {
             top: 50,
             right: 50,
-            bottom: 70,
+            bottom: 130,
             left: 40
         };
         this.init();//初始化画布
@@ -243,7 +243,7 @@ export default class Line {
         this.rectGroup.selectAll('rect')
             .data(this.dataCountry)
             .join("rect")
-            .attr("fill", this.color(this.countryName))
+            .attr("fill", "steelblue")
             .attr('width', (this.width / this.dataCountry.length) / 2)
             .attr('height', d => {
                 return this.height - this.margin.bottom - this.yScale(+d[this.targetDataType]);
@@ -261,8 +261,8 @@ export default class Line {
                     .style('font-size', '1rem')
                     .style('font-weight', 900)
                     .text(
-                        `时间:${d["date"]}
-                        数目: ${+d[this.targetDataType]}`
+                        `时间:${d["date"]}`+"\n"+
+                        `${this.targetDataType}: ${+d[this.targetDataType]}`
                     )
             })
             .on('mouseout', () => {

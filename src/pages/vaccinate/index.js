@@ -26,11 +26,7 @@ const initChart = async () => {
   let line = new Line('vaccines-center', lineData);
   radioSet.setLine(line);
   // 绘制表格
-  // const tableData = [
-  //     { "公司": "111", "data": "test" },
-  //     { "公司": "222", "data": "test11" },
-  // ]
-  // let table = new Table('table', tableData);
+
   // // 绘制饼图
   // let pieData = [
   //     { name: 'apple', value: 150 },

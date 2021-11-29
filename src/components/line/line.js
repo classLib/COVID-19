@@ -22,7 +22,7 @@ export default class Line {
         this.tooltip = null;
         this.line = null;
         this.margin = {
-            top: 50,
+            top: 10,
             right: 50,
             bottom: 70,
             left: 40
@@ -32,10 +32,16 @@ export default class Line {
     }
     init() {
         this.initSvg();
+        this.initTransition();
         this.initMainGroup();
         this.initAxis();
         this.initEvents();
         this.initZoom();
+    }
+    initTransition() {
+        this.transition = this.svg.transition()
+            .duration(this.duration)
+            .ease(d3.easeLinear);
     }
     initAxis() {
         this.xAxis = this.mg.append('g').attr('class', 'x-axis');
@@ -49,7 +55,7 @@ export default class Line {
         this.svg = d3.select(`#${this.id}`)
             .append('svg');
         // 响应式盒子
-        this.innerHeight = this.height - this.margin.top - this.margin.bottom;
+        this.innerHeight = this.height - this.margin.top * 2 - this.margin.bottom;
         this.innerWidth = this.width - this.margin.left - this.margin.right;
         this.viewBox = `0 0 ${this.width} ${this.height}`;
 
@@ -243,7 +249,8 @@ export default class Line {
         this.rectGroup.selectAll('rect')
             .data(this.dataCountry)
             .join("rect")
-            .attr("fill", this.color(this.countryName))
+            // .transition(this.transition)
+            .attr("fill", "steelblue")
             .attr('width', (this.width / this.dataCountry.length) / 2)
             .attr('height', d => {
                 return this.height - this.margin.bottom - this.yScale(+d[this.targetDataType]);
@@ -261,8 +268,8 @@ export default class Line {
                     .style('font-size', '1rem')
                     .style('font-weight', 900)
                     .text(
-                        `时间:${d["date"]}
-                        数目: ${+d[this.targetDataType]}`
+                        `时间:${d["date"]}`+"\n"+
+                        `${this.targetDataType}: ${+d[this.targetDataType]}`
                     )
             })
             .on('mouseout', () => {
@@ -308,5 +315,9 @@ export default class Line {
             .style('stroke', d => this.color(this.countryName))
             .style('stroke-width', 2)
             .style('fill', 'transparent')
+    }
+
+    setFunnel(funnel){
+        this.funnel = funnel;
     }
 }

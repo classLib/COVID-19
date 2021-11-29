@@ -32,8 +32,8 @@ async function index() {
     key,
     values
   }))
-  console.log(groupedByCountryDate)
-  console.log(groupedByCountryName)
+  // console.log(groupedByCountryDate)
+  // console.log(groupedByCountryName)
   // 绘制柱状图
   let bar = new Bar('bar', groupedByCountryName);
   // 绘制地图

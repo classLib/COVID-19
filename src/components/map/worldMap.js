@@ -5,6 +5,8 @@ export default class WorldMap {
         this.data = data;
         this.targetDataIndex = 0; // 初始的时间索引
         this.targetData = this.data[this.targetDataIndex]; // 初始的当天的所有国家的信息
+
+        console.log(this.targetData)
         this.targetDataType = 'Cumulative_cases';
 
         this.mapByCode = null;
@@ -32,6 +34,8 @@ export default class WorldMap {
         this.map = null;
 
         this.color = null;
+
+        this.bar = null;
 
         this.init();
         this.render();
@@ -75,26 +79,6 @@ export default class WorldMap {
             .style('text-anchor', 'middle')
             .text('')
     }
-
-
-    // initEvent() {
-    //     this.selectControl = d3.select(`#${this.id}`)
-    //         .append('div')
-    //         .attr('class', 'my-1')
-    //         .style('display', 'flex')
-    //         .style('align-items', 'center');
-    //     this.selectType = this.selectControl
-    //         .append('select')
-    //         .on('change', () => {
-    //             this.targetDataType = d3.event.target.value;
-    //             //数据改变更新视图
-    //             this.render();
-    //         })
-    //         .selectAll('option')
-    //         .data(['new_cases', 'new_death', 'cumulative_cases', 'cumulative_deaths', 'mortality'])
-    //         .join('option')
-    //         .text(d => d);
-    // }
     initZoom() { //拖拽
         this.svg
             .call(d3.zoom()
@@ -126,51 +110,40 @@ export default class WorldMap {
 
     // 更新颜色比例尺
     renderScale() {
-
         let values = this.targetData.values.map(d => +d[this.targetDataType]);
-        // 映射颜色比例尺的数据范围
         let extent = d3.extent(this.targetData.values, d => +d[this.targetDataType]);
-        console.log(values)
-
         this.color = d3.scaleSequentialQuantile()
             .domain([...values])
             .interpolator(d3.interpolatePuBu)
-
     }
 
     // 更新路径
     renderProjection() {
         this.initProjection = d3
-            // 投影在二维平面
             .geoEquirectangular()
-            // .scale 是缩放的
-            // .fitSize 是大小宽度的
             .fitSize([this.width * 1.2, this.height * 1.2], this.geoData)
-            // .translate 是左右移动的
             .translate([this.width * 0.46, this.height * 0.6]);
-        // 路径生成器,生成path所需要的标准数据
         this.geoPath = d3.geoPath().projection(this.initProjection);
-        // console.log(this.geoPath);
     }
 
 
     // 更新地图
     renderMap() {
         this.map = this.mg.selectAll('path')
-
             .data(this.geoData.features)
             .join(
                 enter => enter.append('path')
                 .style('cursor', 'pointer')
                 .attr('fill', 'transparent')
-                .on('click', d => {
-                    let data = this.getDataByGeoData(d); //得到对应疫情数据
-                    if (data) {
-                        let name = this.getDataByGeoData(d)['country_zh']; //取得中文名字
-                        this.histogram.targetData = this.histogram.getDataByCountryName(name)
-                        this.histogram.selectCountry.property('value', name);
-                        this.histogram.render();
-                    }
+                .on('click', (event, d) => {
+                    let name = this.getDataByGeoData(d)['Country']; //取得中文名字
+                    console.log(name)
+                    let data = this.bar.getDataByCountryName(name);
+                    console.log(data)
+                    this.bar.targetData = data == null ? [] : data;
+                    this.bar.selectCountry.property('value', name);
+                    this.bar.render();
+
                 })
                 .on("mouseover", (event, d) => {
                     // 设置透明度
@@ -219,6 +192,7 @@ export default class WorldMap {
      * 
      */
     getDataByGeoData(d) {
+        console.log(this.mapByCode)
         return this.mapByCode.get(d.properties.POSTAL) ||
             this.mapByName.get(d.properties.NAME) ||
             this.mapByName.get(d.properties.FORMAL_EN) ||
@@ -239,14 +213,16 @@ export default class WorldMap {
             this.mapByName.get(d.properties.SUBUNIT) ||
             undefined;
     }
-    // setHistogram(histogram) {
-    //     this.histogram = histogram;
-    // }
+    setBar(bar) {
+        this.bar = bar;
+    }
     // 渐变效果
     initTransition() {
         this.transition = this.svg.transition()
             .duration(this.duration)
             .ease(d3.easeLinear);
     }
+
+
 
 }

@@ -1,4 +1,5 @@
-import * as d3 from 'd3'
+import * as d3 from 'd3';
+
 export default class Line {
     constructor(id, data) {
         this.id = id;
@@ -15,6 +16,7 @@ export default class Line {
         this.dataY = null;
         this.xScale = null;
         this.yScale = null;
+        this.tooltip = null;
         this.line = null;
         this.margin = {
             top: 50,
@@ -30,6 +32,7 @@ export default class Line {
         this.initMainGroup();
         this.initAxis();
         this.initEvents();
+        this.initZoom();
     }
     initAxis() {
         this.xAxis = this.mg.append('g').attr('class', 'x-axis');
@@ -56,6 +59,22 @@ export default class Line {
         this.mg = this.svg.append('g')
             .attr('id', `${this.id}MainGroup`)
             .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
+        this.tooltip = d3.select('body')
+            .append('div')
+            .style('position', 'absolute')
+            .style('z-index', '10')
+            .style('visibility', 'hidden')
+            .style('text-anchor', 'middle')
+            .text('');
+    }
+    initZoom() { //拖拽
+        this.svg
+            .call(d3.zoom()
+                .on('zoom', this.zoomed)
+            );
+    }
+    zoomed = (event) => {
+        this.mg.attr('transform', `translate(${event.transform.x},${event.transform.y}) scale(${event.transform.k})`)
     }
     initEvents() {
         this.inputs = d3.select(`#${this.id}`)
@@ -107,7 +126,6 @@ export default class Line {
         this.rectGroup.selectAll('rect')
             .data(this.dataCountry)
             .join("rect")
-            .transition(this.transition)
             .attr("fill", this.color(this.countryName))
             .attr('width', (this.width / this.dataCountry.length) / 2)
             .attr('height', d => {
@@ -117,22 +135,29 @@ export default class Line {
                 return this.xScale(new Date(d['date']));
             })
             .attr('y', d => this.yScale(+d[this.targetDataType]))
+            .on('mouseover', (event, d) => {
+                this.tooltip.style('visibility', 'visible')
+                    .style('left', `${event.pageX + 40 + 'px'}`)
+                    .style('top', `${event.pageY + 'px'}`)
+                    .style('opacity', 0.5)
+                    .style('color', '#EA5151')
+                    .style('font-size', '1rem')
+                    .style('font-weight', 900)
+                    .text(
+                        `时间:${d["date"]}
+                        数目: ${+d[this.targetDataType]}`
+                    )
+            })
+            .on('mouseout', () => {
+                this.tooltip.style('visibility', 'hidden')
+            });
     }
     renderScale() {
-        const startDate = new Date(this.dataCountry[0].date),
-            endDate = new Date(this.dataCountry[this.dataCountry.length - 1].date);
         this.xScale = d3.scaleTime()
             //规范日期格式后找最大
             .domain(d3.extent(this.dataCountry, d => new Date(d['date'])))
             .nice()
-            .range([this.margin.left, this.width - this.margin.right]//range);
-
-        // d3.scaleTime(
-        //     [startDate, endDate], //domain
-        //     [this.margin.left, this.width - this.margin.right]//range
-
-        // );
-            );
+            .range([this.margin.left, this.innerWidth]);
         this.dataY = this.dataCountry.map(d => +d[this.targetDataType]);
         const yMax = Number.parseInt(d3.max(this.dataY));
         this.yScale = d3.scaleLinear(

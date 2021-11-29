@@ -14,7 +14,6 @@ const initChart = async () => {
     '/assets/data/vaccinations.csv'
   );
   const groupData = d3.groups(vaccinationsData, (d) => d["location"]);
-  console.log(groupData);
   // 绘制单选框集合
   let radioSet = new RadioSet('vaccines-left', groupData);
 
@@ -26,7 +25,7 @@ const initChart = async () => {
   }
   let line = new Line('vaccines-center', lineData);
   radioSet.setLine(line);
-  // // 绘制表格
+  // 绘制表格
   // const tableData = [
   //     { "公司": "111", "data": "test" },
   //     { "公司": "222", "data": "test11" },

@@ -45,17 +45,12 @@ const initChart = async () => {
   radioSet.setLine(line);
   // 绘制表格
   // 绘制漏斗图
+  const dataByDate = d3.groups(pieGroupData[1][1], d => d["date"]);
+  console.group(dataByDate)
+
   const data = [
-    { action: '访问', visitor: 500, site: '站点1' },
-    { action: '浏览', visitor: 400, site: '站点1' },
-    { action: '交互', visitor: 300, site: '站点1' },
-    { action: '下单', visitor: 200, site: '站点1' },
-    { action: '完成', visitor: 100, site: '站点1' },
-    { action: '访问', visitor: 550, site: '站点2' },
-    { action: '浏览', visitor: 420, site: '站点2' },
-    { action: '交互', visitor: 280, site: '站点2' },
-    { action: '下单', visitor: 150, site: '站点2' },
-    { action: '完成', visitor: 80, site: '站点2' },
+    { action: '访问', visitor: 500, site: 'per_' },
+    { action: '浏览', visitor: 400, site: 'pre_full' },
   ];
   data.sort(function (obj1, obj2) {
     // 从小到大
@@ -133,6 +128,6 @@ const initChart = async () => {
   chart.interaction('element-active');
   chart.removeInteraction('legend-filter');
   chart.render();
-
+  radioSet.setChart(chart);
 }
 initChart();

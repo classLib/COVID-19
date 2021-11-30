@@ -48,11 +48,14 @@ export default class RadioSet {
                 let countryName = e.target.childNodes[1].innerText;
                 input.checked = 'checked';
                 this.data.map((d) => {
-                    if (d[0] === countryName) this.line.render(
-                        {
-                            "country": d[0],
-                            "data": d[1]
-                        });
+                    let tmp = {
+                        "country": d[0],
+                        "data": d[1]
+                    };
+                    if (d[0] === countryName) {
+                        this.line.render(tmp);
+                        this.chart.changeData(tmp["data"]);
+                    }
                 })
             })
         this.selectCountryRadio = this.selectCountryDiv.selectAll("input")
@@ -68,5 +71,8 @@ export default class RadioSet {
     setLine(line) {
         this.line = line;
     }
-
+// 创建一个实例化对象，chart
+    setChart(chart){
+        this.chart = chart;
+    }
 }

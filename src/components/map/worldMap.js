@@ -1,9 +1,10 @@
 import * as d3 from 'd3'
+import getRatioByName from "../util/getRatio"
 export default class WorldMap {
     constructor(id, data, geoData) {
         //数据
         this.data = data;
-        this.targetDataIndex = 0; // 初始的时间索引
+        this.targetDataIndex = data.length - 1; // 初始的时间索引
         this.targetData = this.data[this.targetDataIndex]; // 初始的当天的所有国家的信息
 
         console.log(this.targetData)
@@ -22,6 +23,7 @@ export default class WorldMap {
         //渐变效果
         this.transition = null;
         this.duration = 250;
+        this.liquidPlot = null;
 
 
         //视图
@@ -78,6 +80,12 @@ export default class WorldMap {
             .style('visibility', 'hidden')
             .style('text-anchor', 'middle')
             .text('')
+        this.text = this.mg.append('text')
+            .attr('id', 'textShow')
+            .attr('transform', `translate(${(this.width) / 3},${(this.height) / 5})`)
+            .style('font-size', '1.5rem')
+            .style('opacity', 0.8)
+            .text('Cumulative_cases Cases')
     }
     initZoom() { //拖拽
         this.svg
@@ -139,11 +147,11 @@ export default class WorldMap {
                     let name = this.getDataByGeoData(d)['Country']; //取得中文名字
                     console.log(name)
                     let data = this.bar.getDataByCountryName(name);
-                    console.log(data)
+                    let curRatio = getRatioByName(this.targetData.values, this.targetDataType, name);
+                    this.liquidPlot.changeData(curRatio)
                     this.bar.targetData = data == null ? [] : data;
                     this.bar.selectCountry.property('value', name);
                     this.bar.render();
-
                 })
                 .on("mouseover", (event, d) => {
                     // 设置透明度
@@ -192,7 +200,6 @@ export default class WorldMap {
      * 
      */
     getDataByGeoData(d) {
-        console.log(this.mapByCode)
         return this.mapByCode.get(d.properties.POSTAL) ||
             this.mapByName.get(d.properties.NAME) ||
             this.mapByName.get(d.properties.FORMAL_EN) ||
@@ -213,8 +220,15 @@ export default class WorldMap {
             this.mapByName.get(d.properties.SUBUNIT) ||
             undefined;
     }
+    // 根据最后一组找所有的比例
+    getRatioByName(name) {
+
+    }
     setBar(bar) {
         this.bar = bar;
+    }
+    setliquidPlot(liquidPlot) {
+        this.liquidPlot = liquidPlot;
     }
     // 渐变效果
     initTransition() {
@@ -222,6 +236,8 @@ export default class WorldMap {
             .duration(this.duration)
             .ease(d3.easeLinear);
     }
+
+
 
 
 

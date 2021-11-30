@@ -47,7 +47,5 @@ async function overViewmMap() {
   worldGeo.setBar(bar);
   worldGeo.setliquidPlot(liquidPlot)
 
-  // 取出中国一天的数据
-
 
 }

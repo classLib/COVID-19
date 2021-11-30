@@ -46,7 +46,6 @@ const initChart = async () => {
   radioSet.setLine(line);
   // 绘制表格
   // 绘制漏斗图
-  console.log(pieGroupData[1][1]);
   const dataByDate = d3.groups(pieGroupData[1][1], d => d["date"]);
   let curDateData = dataByDate[dataByDate.length - 1][1];
   let data = [];
@@ -54,19 +53,15 @@ const initChart = async () => {
     data.push({
       action: d["age_group"],
       visitor: d["people_fully_vaccinated_per_hundred"],
-      site: "people_fully_vaccinated_per_hundred"
+      site: "fully_vaccinated"
     }, {
       action: d["age_group"],
       visitor: d["people_vaccinated_per_hundred"],
-      site: "people_vaccinated_per_hundred"
+      site: "vaccinated"
     })
   })
-  data.sort(function (obj1, obj2) {
-    // 从小到大
-    return obj1.visitor - obj2.visitor;
-  });
   let funnelInstance = funnel(data);
-
+  line.setFunnel(funnelInstance);
   radioSet.setFunnel(funnelInstance);
 }
 initChart();

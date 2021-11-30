@@ -6,6 +6,9 @@
 */
 import {Chart} from '@antv/g2';
 export default function funnel(data) {
+  data.sort(function (obj1, obj2) {
+    return obj1.visitor - obj2.visitor;
+  });
   const chart = new Chart({
     container: 'vaccines-funnel',
     autoFit: true,

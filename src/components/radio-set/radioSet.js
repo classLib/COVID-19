@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
 export default class RadioSet {
-    constructor(id, data) {
+    constructor(id, data, ageData) {
         this.id = id;
         this.data = data;
-
+        this.ageData = ageData;
+        this.chart = null;
+        this.funnel = null;
         this.svg = null;
         this.mg = null;
 
@@ -54,9 +56,30 @@ export default class RadioSet {
                     };
                     if (d[0] === countryName) {
                         this.line.render(tmp);
-                        this.chart.changeData(tmp["data"]);
                     }
                 })
+                // 找到这个国家的数据
+                this.ageDataFiltered = this.ageData.filter(d => d[0] === countryName)[0][1];
+                // 找到今天的数据
+                const dataByDate = d3.groups(this.ageDataFiltered, d => d["date"])
+                let curDateData = dataByDate[dataByDate.length - 1][1];
+                let data = [];
+                curDateData.forEach((d) => {
+                    data.push({
+                        action: d["age_group"],
+                        visitor: d["people_fully_vaccinated_per_hundred"],
+                        site: "people_fully_vaccinated_per_hundred"
+                    }, {
+                        action: d["age_group"],
+                        visitor: d["people_vaccinated_per_hundred"],
+                        site: "people_vaccinated_per_hundred"
+                    })
+                })
+                data.sort(function (obj1, obj2) {
+                    // 从小到大
+                    return obj1.visitor - obj2.visitor;
+                });
+                this.funnel.changeData(data);
             })
         this.selectCountryRadio = this.selectCountryDiv.selectAll("input")
             .data([1])
@@ -71,8 +94,9 @@ export default class RadioSet {
     setLine(line) {
         this.line = line;
     }
-// 创建一个实例化对象，chart
-    setChart(chart){
-        this.chart = chart;
+    // 创建一个实例化对象，chart
+    setFunnel(funnel) {
+        console.group(funnel);
+        this.funnel = funnel;
     }
 }

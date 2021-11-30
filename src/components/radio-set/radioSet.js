@@ -58,15 +58,16 @@ export default class RadioSet {
                 let data = [];
                 curDateData.forEach((d) => {
                     data.push({
-                        action: d["age_group"],
-                        visitor: d["people_vaccinated_per_hundred"],
-                        site: "vaccinated"
+                      action: d["age_group"],
+                      visitor: d["people_fully_vaccinated_per_hundred"],
+                      site: "fully_vaccinated"
                     }, {
-                        action: d["age_group"],
-                        visitor: d["people_fully_vaccinated_per_hundred"],
-                        site: "fully_vaccinated"
+                      action: d["age_group"],
+                      visitor: d["people_vaccinated_per_hundred"],
+                      site: "vaccinated"
                     })
-                })
+                  });
+                
                 this.funnel.changeData(data);
 
                 this.data.map((d) => {
@@ -94,7 +95,7 @@ export default class RadioSet {
         this.line = line;
     }
     // 创建一个实例化对象，chart
-    setFunnel(funnel) {
+    setRadioFunnel(funnel) {
         this.funnel = funnel;
     }
 }

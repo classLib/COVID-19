@@ -190,23 +190,27 @@ export default class Line {
             "countryname": this.countryName,
             "data": this.dataAll.slice(0, index)
         });
+        console.log(index);
+        console.log(this.funnelData);
         for (let i = 0; i < this.funnelData.length; ++i) {
             let cur = this.funnelData[i];
+            // console.log(cur);
             let d = new Date(cur[0]),
                 day_ = new Date(this.dataAll[index - 1].date);
             if (d.getTime() - day_.getTime() >= 0) {
                 let data = [];
                 cur[1].forEach((d) => {
-                    data.push({
-                        action: d["age_group"],
-                        visitor: d["people_fully_vaccinated_per_hundred"],
-                        site: "people_fully_vaccinated_per_hundred"
-                    }, {
-                        action: d["age_group"],
-                        visitor: d["people_vaccinated_per_hundred"],
-                        site: "people_vaccinated_per_hundred"
-                    })
+                  data.push({
+                    action: d["age_group"],
+                    visitor: d["people_fully_vaccinated_per_hundred"],
+                    site: "fully_vaccinated"
+                  }, {
+                    action: d["age_group"],
+                    visitor: d["people_vaccinated_per_hundred"],
+                    site: "vaccinated"
+                  })
                 })
+                console.log(data);
                 this.funnel.changeData(data);
                 break;
             }
@@ -333,7 +337,7 @@ export default class Line {
             .style('fill', 'transparent')
     }
 
-    setFunnel(funnel) {
+    setLineFunnel(funnel) {
         this.funnel = funnel;
     }
 }

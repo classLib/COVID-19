@@ -4,8 +4,21 @@
 此时我们选用的数据是最近这一周的数据，
 之后我根据进度条的时候来切换对应的图表，找出那个时间位于的区间，来绘制我们右边的图表.
 */
-import {Chart} from '@antv/g2';
-export default function funnel(data) {
+import { Chart } from '@antv/g2';
+export default function funnel(cur) {
+  let data = [];
+  cur.forEach((d) => {
+    data.push({
+      action: d["age_group"],
+      visitor: d["people_fully_vaccinated_per_hundred"],
+      site: "fully_vaccinated"
+    }, {
+      action: d["age_group"],
+      visitor: d["people_vaccinated_per_hundred"],
+      site: "vaccinated"
+    })
+  })
+  console.log(data);
   data.sort(function (obj1, obj2) {
     return obj1.visitor - obj2.visitor;
   });

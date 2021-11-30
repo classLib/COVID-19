@@ -48,20 +48,9 @@ const initChart = async () => {
   // 绘制漏斗图
   const dataByDate = d3.groups(pieGroupData[1][1], d => d["date"]);
   let curDateData = dataByDate[dataByDate.length - 1][1];
-  let data = [];
-  curDateData.forEach((d) => {
-    data.push({
-      action: d["age_group"],
-      visitor: d["people_fully_vaccinated_per_hundred"],
-      site: "fully_vaccinated"
-    }, {
-      action: d["age_group"],
-      visitor: d["people_vaccinated_per_hundred"],
-      site: "vaccinated"
-    })
-  })
-  let funnelInstance = funnel(data);
-  line.setFunnel(funnelInstance);
-  radioSet.setFunnel(funnelInstance);
+  
+  let funnelInstance = funnel(curDateData);
+  radioSet.setRadioFunnel(funnelInstance);
+  line.setLineFunnel(funnelInstance);
 }
 initChart();

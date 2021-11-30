@@ -13,10 +13,12 @@ import * as d3 from 'd3';
 
 import WorldMap from "../../components/map/worldMap";
 import Bar from "../../components/bar/bar"
+import overScrollHistogram from "../../components/scroll_histogram/scrollHistogram"
+import overViewPie from "../../components/pie/pie"
+import overViewLiquidPlot from "../../components/liquidPlot/liquidPlot"
 
-
-index();
-async function index() {
+overViewmMap();
+async function overViewmMap() {
   const data = await d3.csv('/assets/data/WHO_COVID_19_global_data.csv');
   const g = await d3.json('/assets/data/worldGeo.json');
   data.forEach(d => {
@@ -32,14 +34,18 @@ async function index() {
     key,
     values
   }))
-  // console.log(groupedByCountryDate)
-  // console.log(groupedByCountryName)
-  // 绘制柱状图
-  let bar = new Bar('bar', groupedByCountryName);
+  // // 绘制柱状图
+  let bar = new Bar('overViewBar', groupedByCountryName, groupedByCountryDate);
+  // 绘制流动比例圆
+  let liquidPlot = overViewLiquidPlot(0.25);
+  // 交互
+  bar.setliquidPlot(liquidPlot)
   // 绘制地图
   let worldGeo = new WorldMap("worldMap", groupedByCountryDate, g)
+  // 绘制横轴柱状图
+  overScrollHistogram(data);
   worldGeo.setBar(bar);
-
+  worldGeo.setliquidPlot(liquidPlot)
 
 
 }

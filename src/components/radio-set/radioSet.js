@@ -1,12 +1,14 @@
 import * as d3 from 'd3';
 export default class RadioSet {
-    constructor(id, data) {
+    constructor(id, data, ageData) {
         this.id = id;
         this.data = data;
-
+        this.ageData = ageData;
+        this.chart = null;
+        this.funnel = null;
         this.svg = null;
         this.mg = null;
-
+        this.dataByDate = null;
         this.width = document.querySelector(`#${this.id}`).offsetWidth;
         this.height = document.querySelector(`#${this.id}`).offsetHeight;
 
@@ -47,13 +49,36 @@ export default class RadioSet {
                 let input = e.target.childNodes[0];
                 let countryName = e.target.childNodes[1].innerText;
                 input.checked = 'checked';
-                this.data.map((d) => {
-                    if (d[0] === countryName) this.line.render(
-                        {
-                            "country": d[0],
-                            "data": d[1]
-                        });
+                // 找到这个国家的数据
+                this.ageDataFiltered = this.ageData.filter(d => d[0] === countryName)[0][1];
+                // 找到今天的数据
+                this.dataByDate = d3.groups(this.ageDataFiltered, d => d["date"]);
+                // 将数据传到line去，这是我这个国家的由时间分组的数据。
+                let curDateData = this.dataByDate[this.dataByDate.length - 1][1];
+                let data = [];
+                curDateData.forEach((d) => {
+                    data.push({
+                        action: d["age_group"],
+                        visitor: d["people_vaccinated_per_hundred"],
+                        site: "vaccinated"
+                    }, {
+                        action: d["age_group"],
+                        visitor: d["people_fully_vaccinated_per_hundred"],
+                        site: "fully_vaccinated"
+                    })
                 })
+                this.funnel.changeData(data);
+
+                this.data.map((d) => {
+                    let tmp = {
+                        "country": d[0],
+                        "data": d[1]
+                    };
+                    if (d[0] === countryName) {
+                        this.line.render(tmp,this.dataByDate);
+                    }
+                })
+                
             })
         this.selectCountryRadio = this.selectCountryDiv.selectAll("input")
             .data([1])
@@ -68,5 +93,8 @@ export default class RadioSet {
     setLine(line) {
         this.line = line;
     }
-
+    // 创建一个实例化对象，chart
+    setFunnel(funnel) {
+        this.funnel = funnel;
+    }
 }

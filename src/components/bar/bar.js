@@ -1,10 +1,15 @@
-import * as d3 from 'd3'
+import * as d3 from 'd3';
+
+import getRatioByName from '../util/getRatio';
+
 
 export default class Bar {
-  constructor(id, data) {
+  constructor(id, dataByName, dataByDate) {
     //数据部分
-    this.data = data;
-    this.targetData = this.getDataByCountryName('China');
+    this.data = dataByName;
+    this.targetDataName = 'China';
+    this.targetData = this.getDataByCountryName(this.targetDataName);
+    this.leastData = dataByDate[dataByDate.length - 1].values
     this.targetDataType = 'New_cases'; // 默认的数据类型
 
     //视图部分
@@ -34,6 +39,7 @@ export default class Bar {
     this.duration = 250;
     // 点击事件
     this.selectCountry = null;
+    this.liquidPlot = null;
 
     this.init(); //初始化画布
     this.render(); //更新画布
@@ -103,8 +109,12 @@ export default class Bar {
       // 增加监听事件，
       .on('change', (event) => {
         let name = event.target.value;
+        this.targetDataName = name;
         this.targetData = this.getDataByCountryName(name);
         this.render();
+        // 更新流动图
+        let curRatio = getRatioByName(this.leastData, this.targetDataType, this.targetDataName)
+        this.liquidPlot.changeData(curRatio)
       })
 
     this.selectCountry
@@ -121,6 +131,11 @@ export default class Bar {
       .on('change', (event) => {
         this.targetDataType = event.target.value;
         this.render();
+
+        // 更新流动图
+        let curRatio = getRatioByName(this.leastData, this.targetDataType, this.targetDataName)
+        this.liquidPlot.changeData(curRatio)
+
       })
       .selectAll('option')
       // 对所有的案例进行绑定
@@ -131,6 +146,7 @@ export default class Bar {
 
 
   }
+
   // 渐变效果
   initTransition() {
     this.transition = this.svg.transition()
@@ -152,7 +168,7 @@ export default class Bar {
     // 表单里面是输入框
     this.input = this.form.append("input")
       .attr("type", "text")
-      .attr("placeholder", "请输入国家名称")
+      .attr("placeholder", "input country name ....")
       .attr("class", "input_my")
     // 表单里面的提交按钮
     this.submitBtn = this.form.append("button")
@@ -174,12 +190,13 @@ export default class Bar {
       if (name) {
         this.targetData = this.getDataByCountryName(name);
         console.log(this.targetData);
-
         this.render();
+        // 更新流动图
+        let curRatio = getRatioByName(this.leastData, this.targetDataType, name)
+        this.liquidPlot.changeData(curRatio)
       }
     })
   }
-
 
   // 通过国家名称去找到对应的数据
   getDataByCountryName(name) {
@@ -288,6 +305,21 @@ export default class Bar {
       // .style("font-size","0.7em")
       .style("text-anchor", "start")
 
+  }
+  // 根据最后一组找所有的比例
+  getRatioByName(name) {
+    console.log(this.targetData)
+    let sumDateByTarge_ = d3.sum(this.targetData.values, d => +d[this.targetDataType])
+    console.log(sumDateByTarge_)
+    for (let i = 0; i < this.targetData.values.length; i++) {
+      if (this.targetData.values[i].Country === name) {
+        return sumDateByTarge_ === 0 ? 0 : parseFloat(+this.targetData.values[i][this.targetDataType] / sumDateByTarge_)
+      }
+    }
+    return 0;
+  }
+  setliquidPlot(liquidPlot) {
+    this.liquidPlot = liquidPlot;
   }
 
 

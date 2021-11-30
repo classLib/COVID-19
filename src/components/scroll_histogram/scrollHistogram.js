@@ -1,111 +1,188 @@
-export default class ScrollHistogram {
+import {
+  Chart,
+  registerAnimation
+} from '@antv/g2';
+import * as d3 from 'd3';
 
-  constructor(id, data) {
-    this.data = data;
-    this.id = id;
-    // 边框
-    this.margin = {
-      top: 150,
-      right: 100,
-      bottom: 150,
-      left: 100
+export default function overScrollHistogram(data) {
+  // 去20的国家累计死亡病例
+  let resDatagroupedByCountryDate_ = processData(data)
+  let resDatagroupedByCountryDate = resDatagroupedByCountryDate_.slice(200, 400)
+  console.log(resDatagroupedByCountryDate)
+  let count = 0;
+  let scrollChart;
+  let interval;
+
+  function countUp() {
+    if (count === 0) {
+      scrollChart = new Chart({
+        container: 'scroll_histogram',
+        autoFit: true,
+
+      });
+      scrollChart.data(handleData(resDatagroupedByCountryDate[count].values));
+      scrollChart.coordinate('rect').transpose();
+      ~
+      scrollChart.legend(false);
+      scrollChart.tooltip(false);
+      scrollChart.axis('Country', {
+        animateOption: {
+          update: {
+            duration: 1000,
+            easing: 'easeLinear'
+          }
+        }
+      });
+      scrollChart.annotation().text({
+        position: ['95%', '90%'],
+        content: resDatagroupedByCountryDate[count].keys,
+        style: {
+          fontSize: 40,
+          fontWeight: 'bold',
+          fill: '#ddd',
+          textAlign: 'end'
+        },
+        animate: false,
+      });
+      scrollChart
+        .interval()
+        .position('Country*Cumulative_cases')
+        .color('Country')
+        .label('Cumulative_cases', (value) => {
+          // if (value !== 0) {
+          return {
+            animate: {
+              appear: {
+                animation: 'label-appear',
+                delay: 0,
+                duration: 1000,
+                easing: 'easeLinear'
+              },
+              update: {
+                animation: 'label-update',
+                duration: 1000,
+                easing: 'easeLinear'
+              }
+            },
+            offset: 5,
+          };
+          // }
+        }).animate({
+          appear: {
+            duration: 1000,
+            easing: 'easeLinear'
+          },
+          update: {
+            duration: 1000,
+            easing: 'easeLinear'
+          }
+        });
+
+      scrollChart.render();
+    } else {
+      scrollChart.annotation().clear(true);
+      scrollChart.annotation().text({
+        position: ['95%', '90%'],
+        content: resDatagroupedByCountryDate[count].keys,
+        style: {
+          fontSize: 40,
+          fontWeight: 'bold',
+          fill: '#ddd',
+          textAlign: 'end'
+        },
+        animate: false,
+      });
+      scrollChart.changeData(handleData(resDatagroupedByCountryDate[count].values));
+    }
+
+    ++count;
+
+    if (count === resDatagroupedByCountryDate.length) {
+      clearInterval(interval);
+    }
+  }
+  countUp();
+  interval = setInterval(countUp, 1200);
+}
+
+registerAnimation('label-appear', (element, animateCfg, cfg) => {
+  const label = element.getChildren()[0];
+  const coordinate = cfg.coordinate;
+  const startX = coordinate.start.x;
+  const finalX = label.attr('x');
+  const labelContent = label.attr('text');
+
+  label.attr('x', startX);
+  label.attr('text', 0);
+
+  const distance = finalX - startX;
+  label.animate((ratio) => {
+    const position = startX + distance * ratio;
+    const text = (labelContent * ratio).toFixed(0);
+
+    return {
+      x: position,
+      text,
     };
-    // 具体的宽高
-    this.width = document.querySelector(`#${id}`).offsetWidth;
-    this.height = document.querySelector(`#${id}`).offsetHeight;
+  }, animateCfg);
+});
 
-    this.svg = null;
-    this.mg = null;
+registerAnimation('label-update', (element, animateCfg, cfg) => {
+  const startX = element.attr('x');
+  const startY = element.attr('y');
+  // @ts-ignore
+  const finalX = cfg.toAttrs.x;
+  // @ts-ignore
+  const finalY = cfg.toAttrs.y;
+  const labelContent = element.attr('text');
+  // @ts-ignore
+  const finalContent = cfg.toAttrs.text;
 
-    this.maxHeight = '100%';
-    this.maxWidth = '100%';
-    // 过渡效果
-    this.duration = 1000;
-    this.transition = d3.transition().duration(this.duration).ease(d3.easeLinear);
-    this.init();
-  }
-  init() {
-    // 初始化标签
-    this.initSvg();
-    // 初始化主体部分
-    this.initMainGroup();
-    // 初始化组别
-    this.initGroups();
-    // 初始化坐标轴
-    this.initScale();
-    // 缩放
-    this.initZoom();
-    return this;
-  }
-  initSvg() {
-    this.svg = d3.select(`#${this.id}`)
-      .append('svg');
-    // 响应式盒子
-    this.innerHeight = this.height - this.margin.top - this.margin.bottom;
-    this.innerWidth = this.width - this.margin.left - this.margin.right;
-    this.viewBox = `0 0 ${this.width} ${this.height}`;
+  const distanceX = finalX - startX;
+  const distanceY = finalY - startY;
+  const numberDiff = +finalContent - +labelContent;
 
-    this.svg
-      .attr('id', `${this.id}svg`)
-      .attr('viewBox', this.viewBox)
-      .style('background-color', this.backgroundColor)
-      .style('max-height', this.maxHeight)
-      .style('max-width', this.maxWidth)
-  }
-  initMainGroup() {
-    this.mg = this.svg.append('g')
-      .attr('id', `${this.id}MainGroup`)
-      .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
-  }
-  initGroups() {
-    // 线条组 ：
-    this.barGroup = this.mg.append('g')
-      .attr('id', 'linesGroup')
-      .attr('transform', `translate(${this.innerWidth / 2},${this.innerHeight / 2})`)
-    // 文字组:
-    this.textGroup = this.mg.append('g')
-      .attr('id', 'textGroup')
-      .attr('transform', `translate(${this.innerWidth / 2},${this.innerHeight / 2})`)
-    // 图例
-    // this.tooltip = d3.select('body')
-    //   .append('div')
-    //   .style('position', 'absolute')
-    //   .style('z-index', '10')
-    //   .style('visibility', 'hidden')
-    //   .style('text-anchor', 'middle')
-    //   .text('')
-  }
-  initScale() {
+  element.animate((ratio) => {
+    const positionX = startX + distanceX * ratio;
+    const positionY = startY + distanceY * ratio;
+    const text = (+labelContent + numberDiff * ratio).toFixed(0);
 
-    this.xScale = d3.scaleLinear()
-      .domain([0, 1000])
-      .range([0, this.innerWidth])
-      .nice()
-    this.yScale = d3.scaleLinear()
-      .domain([0, 1000])
-      .range([this.innerHeight, 0])
-      .nice()
-  }
-  initAxis() {
-    this.xAxisGroup
-      .call(d3.axisTop(this.xScale)
-        .tickSizeInner(`-${this.innerHeight}`)
-        .ticks(5).tickSize(0)
-      )
-      .selectAll('g text')
-      .attr('y', 10)
-      .attr("x", 10)
-      .attr('font-size', '1em')
-      .attr('font-weight', 900)
-    this.yAxisGroup
-      .call(d3.axisLeft(this.yScale)
-        .tickSizeInner(`-${this.innerWidth}`)
-        .ticks(6)
-      )
-      .selectAll('g text')
-      .attr('font-size', '1em')
-      .attr('font-weight', 900)
-      .attr('x', '-10')
-  }
+    return {
+      x: positionX,
+      y: positionY,
+      text,
+    };
+  }, animateCfg);
+});
 
+function handleData(source) {
+  source.sort((a, b) => {
+    return a.Cumulative_cases - b.Cumulative_cases;
+  });
+
+  return source;
+}
+// 
+function processData(data) {
+  let groupedByCountryDate = Array.from(d3.group(data, d => d.Date_reported), ([key, values]) => ({
+    key,
+    values
+  }))
+  let tempData = groupedByCountryDate[groupedByCountryDate.length - 1].values.sort((a, b) => {
+    return a.Cumulative_deaths < b.Cumulative_deaths;
+  })
+  let upContryName = tempData.slice(0, 20).map((d) => d.Country);
+  let resData = [];
+  upContryName.forEach(item => {
+    data.forEach(ele => {
+      if (item === ele.Country) {
+        resData.push(ele);
+      }
+    })
+  })
+  let resDatagroupedByCountryDate = Array.from(d3.group(resData, d => d.Date_reported), ([key, values]) => ({
+    key,
+    values
+  }))
+  return resDatagroupedByCountryDate;
 }

@@ -29,7 +29,7 @@ export function createTableLine(selection, data) {
   const line = new Line(selection.node(), {
     data: result,
     height: 300,
-    padding: [20, 0, 20, 50],
+    padding: [20, 0, 20, 100],
     xField: "date",
     yField: "value",
     seriesField: "type",

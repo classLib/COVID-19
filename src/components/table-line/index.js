@@ -1,46 +1,46 @@
-import "./index.css";
-import { csv } from "d3";
+import { Line } from "@antv/g2plot";
 
-export function createTableLine(selection) {
-  const thead = selection.append("div");
-  const tbody = selection.append("div");
-  renderTableHeader(thead);
-  renderTableBody(tbody);
-}
+export function createTableLine(selection, data) {
+  let result = [];
 
-function renderTableHeader(selection) {
-  let titles = [
-    {
-      id: 0,
-      name: "国家",
+  data[0].values.forEach((d) => {
+    result.push({
+      date: d.Date_reported,
+      value: +d.Cumulative_cases,
+      type: "Cumulative_cases",
+    });
+    result.push({
+      date: d.Date_reported,
+      value: +d.Cumulative_deaths,
+      type: "Cumulative_deaths",
+    });
+    result.push({
+      date: d.Date_reported,
+      value: +d.New_cases,
+      type: "New_cases",
+    });
+    result.push({
+      date: d.Date_reported,
+      value: +d.New_deaths,
+      type: "New_deaths",
+    });
+  });
+
+  const line = new Line(selection.node(), {
+    data: result,
+    height: 300,
+    padding: [20, 0, 20, 50],
+    xField: "date",
+    yField: "value",
+    seriesField: "type",
+    legend: {
+      position: "top",
     },
-    {
-      id: 1,
-      name: "累计病例",
+    xAxis: {
+      type: "time",
     },
-    {
-      id: 2,
-      name: "死亡病例",
-    },
-  ];
+    smooth: true,
+  });
 
-  selection
-    .classed("tr", true)
-    .selectAll("div")
-    .data(titles, (d) => d.id)
-    .join("div")
-    .classed("th", true)
-    .text((d) => d.name);
-}
-
-async function renderTableBody(selection) {
-  const data = await csv("/assets/data/WHO_COVID_19_global_data.csv");
-  console.log(data);
-  // console.log(data);
-  // selection
-  //   .selectAll("div")
-  //   .data(WorldData)
-  //   .join("div")
-  //   .classed("tr", true)
-  //   .text((d, i) => i);
+  line.render();
 }

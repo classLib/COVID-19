@@ -1,9 +1,19 @@
 import "./index.css";
-import { selectAll, select, csv, groups, sum } from "d3";
+import {
+  selectAll,
+  easeCubic as ease,
+  scaleLinear,
+  select,
+  csv,
+  groups,
+  sum,
+} from "d3";
 import { createTableLine } from "../table-line";
+import { Position } from "@antv/attr";
 
 export async function createTable(selection) {
   selection.classed("border my-3 p-3", true);
+
   const title = selection.append("h4");
   const thead = selection.append("div");
   const tbody = selection.append("div").classed("data-table-tbody", true);
@@ -17,6 +27,7 @@ export async function createTable(selection) {
   });
 
   renderTableBody(tbody, dt);
+  renderSearch(dt);
 }
 
 function onSort(tbody, dt) {
@@ -82,6 +93,7 @@ async function renderTableBody(selection, data) {
     .selectAll("div")
     .data(data, (d) => d.Country)
     .join("div")
+    .attr("id", (d) => d.Country_code)
     .classed("data-table-tr", true)
     .on("click", onRenderChart());
 
@@ -152,4 +164,48 @@ function onRenderChart() {
       createTableLine(div, div.data());
     }
   };
+}
+
+function renderSearch(data) {
+  select("#select")
+    .on("change", function () {
+      const id = select(this).property("value");
+
+      const node = select(`#${id}`).node();
+      const tbody = document.querySelector(".data-table-tbody");
+      tbody.scrollTop = node.offsetTop - tbody.offsetTop;
+
+      // let getTop = scaleLinear()
+      //   .domain([0, 300])
+      //   .range([0, node.offsetTop - tbody.offsetTop]);
+
+      const startValue = 0;
+      const endValue = node.offsetTop - tbody.offsetTop;
+
+      let getTop = (t) => {
+        console.log(t);
+        const height = startValue + endValue * ease(t / 1000);
+        console.log(height);
+        return height;
+      };
+
+      let start;
+      let timer;
+      const duration = (time) => {
+        if (!start) start = time;
+        const t = time - start;
+
+        tbody.scrollTop = getTop(t);
+
+        if (t <= 1000) timer = window.requestAnimationFrame(duration);
+        else window.cancelAnimationFrame(timer);
+      };
+
+      window.requestAnimationFrame(duration);
+    })
+    .selectAll("option")
+    .data(data)
+    .join("option")
+    .property("value", (d) => d.Country_code)
+    .text((d) => d.Country);
 }

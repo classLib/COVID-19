@@ -1,8 +1,7 @@
-
-.form_my{
-  position :relative;
+.form_my {
+  position: relative;
 }
-.btn_my{
+.btn_my {
   font-weight: 600;
   border-radius: 10%;
   outline: none;
@@ -11,11 +10,11 @@
   font-size: small;
 }
 
-.btn_my>button:hover{
-  transition: color .3s linear;
+.btn_my > button:hover {
+  transition: color 0.3s linear;
   color: #212121;
 }
-.input_my{
+.input_my {
   height: 20px;
   width: 0 auto;
   background-color: transparent;
@@ -23,21 +22,27 @@
   border: 2px solid steelblue;
   font-size: small;
 }
-.input_my:hover{
+.input_my:hover {
   transition: 0.2s ease-in-out;
   box-shadow: 0 0 10px 1px steelblue;
 }
 
-.data_info{
-
+.data_info {
   display: block;
   height: 50px;
   width: 120px;
   font-weight: 900;
   font-size: 20;
-  background-color:transparent;
+  background-color: transparent;
   /* opacity: 0.3; */
   position: absolute;
   /* border-style: solid;  */
   white-space: nowrap;
+}
+
+.chart-contairt {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px 2px #eee;
 }

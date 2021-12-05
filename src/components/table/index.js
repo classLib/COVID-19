@@ -67,11 +67,11 @@ function renderTableHeader(selection, { onSort: onSort }) {
     },
     {
       id: "Last7Days_cases",
-      name: "近7日病例",
+      name: "近7日新增病例",
     },
     {
       id: "Last7Days_deaths",
-      name: "近7日病例",
+      name: "近7日死亡病例",
     },
   ];
 

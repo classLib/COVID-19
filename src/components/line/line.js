@@ -271,11 +271,17 @@ export default class Line {
   renderRect() {
     this.rectGroup
       .selectAll("rect")
-      .data(this.dataCountry)
+      .data(this.dataCountry, (d) => {
+        return d.date;
+      })
       .join("rect")
-      // .transition(this.transition)
-      .attr("fill", "steelblue")
+      
+      .transition()
       .attr("width", this.width / this.dataCountry.length / 2)
+      .attr("x", (d) => {
+        return this.xScale(new Date(d["date"]));
+      })
+      .attr("fill", "steelblue")
       .attr("height", (d) => {
         return (
           this.height -
@@ -283,28 +289,25 @@ export default class Line {
           this.yScale(+d[this.targetDataType])
         );
       })
-      .attr("x", (d) => {
-        return this.xScale(new Date(d["date"]));
-      })
-      .attr("y", (d) => this.yScale(+d[this.targetDataType]))
-      .on("mouseover", (event, d) => {
-        this.tooltip
-          .style("visibility", "visible")
-          .style("left", `${event.pageX + 40 + "px"}`)
-          .style("top", `${event.pageY + "px"}`)
-          .style("opacity", 0.5)
-          .style("color", "#EA5151")
-          .style("font-size", "1rem")
-          .style("font-weight", 900)
-          .text(
-            `时间:${d["date"]}` +
-              "\n" +
-              `${this.targetDataType}: ${+d[this.targetDataType]}`
-          );
-      })
-      .on("mouseout", () => {
-        this.tooltip.style("visibility", "hidden");
-      });
+      .attr("y", (d) => this.yScale(+d[this.targetDataType]));
+    // .on("mouseover", (event, d) => {
+    //   this.tooltip
+    //     .style("visibility", "visible")
+    //     .style("left", `${event.pageX + 40 + "px"}`)
+    //     .style("top", `${event.pageY + "px"}`)
+    //     .style("opacity", 0.5)
+    //     .style("color", "#EA5151")
+    //     .style("font-size", "1rem")
+    //     .style("font-weight", 900)
+    //     .text(
+    //       `时间:${d["date"]}` +
+    //         "\n" +
+    //         `${this.targetDataType}: ${+d[this.targetDataType]}`
+    //     );
+    // })
+    // .on("mouseout", () => {
+    //   this.tooltip.style("visibility", "hidden");
+    // });
   }
   renderScale() {
     this.xScale = d3
@@ -323,12 +326,12 @@ export default class Line {
   }
 
   renderAxis() {
-    this.xAxis = this.xAxis
-      .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
+     this.xAxis
+      .attr("transform", `translate(0,${this.height - this.margin.bottom})`).transition()
       .call(d3.axisBottom(this.xScale).tickFormat(d3.timeFormat("%Y %m %d")));
 
-    this.yAxis = this.yAxis
-      .attr("transform", `translate(${this.margin.left},0)`)
+    this.yAxis
+      .attr("transform", `translate(${this.margin.left},0)`).transition()
       .call(d3.axisLeft(this.yScale));
   }
 

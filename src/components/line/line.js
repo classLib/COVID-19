@@ -13,7 +13,7 @@ export default class Line {
         this.duration = 250;
         this.targetDataType = "daily_vaccinations";
         this.dataAll = null;
-
+        this.funnelData = null;
         this.width = document.querySelector(`#${this.id}`).offsetWidth;
         this.height = document.querySelector(`#${this.id}`).offsetHeight;
         this.dataY = null;
@@ -122,11 +122,12 @@ export default class Line {
         );
     }
 
-    render(data) {
+    render(data, funnel) {
         if (data) this.data = data;
         this.countryName = this.data.country;
         this.dataCountry = this.data.data;
         this.dataAll = this.dataCountry;
+        this.funnelData = funnel;
         this.color = this.initColor();
         this.renderInputControl();
         this.initInputControlEvent();
@@ -180,20 +181,45 @@ export default class Line {
             .text(this.dataCountry[this.dataCountry.length - 1]['date']);
 
     }
+    renderByBar(index) {
+        // 改变outinput
+        this.rangeInput.property("value", this.targetDataIndex);
+        this.rangeOutput.text(this.dataAll[index].date);
+        // 更新视图
+        this.renderRectBox({
+            "countryname": this.countryName,
+            "data": this.dataAll.slice(0, index)
+        });
+        for (let i = 0; i < this.funnelData.length; ++i) {
+            let cur = this.funnelData[i];
+            let d = new Date(cur[0]),
+                day_ = new Date(this.dataAll[index - 1].date);
+            if (d.getTime() - day_.getTime() >= 0) {
+                let data = [];
+                cur[1].forEach((d) => {
+                    data.push({
+                        action: d["age_group"],
+                        visitor: d["people_fully_vaccinated_per_hundred"],
+                        site: "people_fully_vaccinated_per_hundred"
+                    }, {
+                        action: d["age_group"],
+                        visitor: d["people_vaccinated_per_hundred"],
+                        site: "people_vaccinated_per_hundred"
+                    })
+                })
+                this.funnel.changeData(data);
+                break;
+            }
 
+        }
+    }
     initInputControlEvent() {
         // 1. 监听选择框
         //改变视图
         this.rangeInput.on("change", (e) => {
             let index = d3.select(e.target).property("value");
             this.targetDataIndex = index;
-            // 改变outinput
-            this.rangeOutput.text(this.dataAll[index].date);
-            // 更新视图
-            this.renderRectBox({
-                "countryname": this.countryName,
-                "data": this.dataAll.slice(0, index)
-            })
+            this.renderByBar(index);
         });
 
         // 只是改变了时间，不变视图
@@ -225,19 +251,9 @@ export default class Line {
                 this.pause();
                 return;
             }
-            console.log(this.targetDataIndex);
             // 修改默认的下标并且更改对应的时间的国家数据
             // this.setTargetDataIndex(this.targetDataIndex);
-            // //更新input框
-            this.rangeInput.property("value", this.targetDataIndex);
-            // //更新output框
-            this.rangeOutput.text(this.dataAll[this.targetDataIndex].date);
-            this.renderRectBox(
-                {
-                    "countryname": this.countryName,
-                    "data": this.dataAll.slice(0, this.targetDataIndex)
-                }
-            );//更新图表
+            this.renderByBar(this.targetDataIndex);
         }, 250)
     }
     pause() {
@@ -268,7 +284,7 @@ export default class Line {
                     .style('font-size', '1rem')
                     .style('font-weight', 900)
                     .text(
-                        `时间:${d["date"]}`+"\n"+
+                        `时间:${d["date"]}` + "\n" +
                         `${this.targetDataType}: ${+d[this.targetDataType]}`
                     )
             })
@@ -317,7 +333,7 @@ export default class Line {
             .style('fill', 'transparent')
     }
 
-    setFunnel(funnel){
+    setFunnel(funnel) {
         this.funnel = funnel;
     }
 }

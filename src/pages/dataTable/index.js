@@ -3,8 +3,8 @@
  */
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import { createTable } from "../../components/table";
+import { createTableLine } from "../../components/table-line";
 import { select } from "d3-selection";
 import "./index.css";
 
-createTable(select("#table"));
+createTableLine(select("#table-line"));

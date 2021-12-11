@@ -1,100 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vaccinate</title>
-  </head>
 
-  <body style="background-color: #eee">
-    <!-- 导航栏 -->
-    <header>
-      <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark"
-        style="height: 8vh"
-      >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"> Navbar </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="./overview.html"> OverView </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="./vaccinate.html">
-                  Vaccinations
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./dataTable.html"> Data Table </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./measure.html"> Measures </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <a class="navbar-brand" href="#"
-              >Global Coronavirus (COVID-19) Dashboard
-            </a>
-            <ul class="navbar-text m-auto">
-              January 3, 2020 - November 23,2021
-            </ul>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vaccinate</title>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> Navbar </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./overview.html"> 概览 </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="./vaccinate.html"> 疫苗 </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dataTable.html"> 数据表格 </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./measure.html"> 措施 </a>
+            </li>
+          </ul>
         </div>
-      </nav>
-    </header>
-    <!-- main -->
-    <main>
-      <div class="container-fluid" id="vaccines-box">
-        <div class="row mt-2">
-          <div class="col-2">
-            <div class="chart-container">
-              <h4 style="text-align: center; height: 5vh; line-height: 5vh">
-                国家选择
-              </h4>
-              <div
-                id="vaccines-left"
-                style="
-                  overflow-y: scroll;
-                  height: 85vh;
-                  border-top: 1px solid #eee;
-                "
-              ></div>
-            </div>
-          </div>
+      </div>
+    </nav>
+  </div>
+  <!-- main -->
+  <section>
+    <div class="container-fluid mt-3" id="vaccines-box">
+      <div class="row" style="width:100vw ; height:85vh;">
+        <div class="col-2 card-box px-1" id="vaccines-left" style="overflow-y: auto;height: 85vh;">
+          <h4 align="center">国家选择</h4>
+        </div>
+        <div class="col-6 card-box" id="vaccines-center" style="height:85vh;">
 
-          <div class="col-6 chart-container">
-            <div class="">
-              <div id="vaccines-center" style="height: 80vh"></div>
-            </div>
+        </div>
+        <div class="col-4" id="vaccines-right">
+          <div id='vaccines-table' class="row card-box " style="height: 40vh ;background-color:rgb(25, 141, 204)">
           </div>
-          <div class="col-4" id="vaccines-right">
-            <div
-              class="chart-container mb-3"
-              id="vaccines-funnel"
-              style="height: 45vh"
-            ></div>
-            <div
-              class="chart-container"
-              id="vaccines-table"
-              style="height: 44vh"
-            ></div>
+          <div id='vaccines-funnel' class="row my-1" style="height: 45vh ;">
           </div>
         </div>
       </div>
-    </main>
-  </body>
+
+
+    </div>
+  </section>
+</body>
+
 </html>

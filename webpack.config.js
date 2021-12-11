@@ -21,44 +21,41 @@ module.exports = {
   devServer: {
     hot: true,
     open: ["/dataTable.html"],
-    compress: true,
+    static: "./dist",
+    compress: false,
     port: 3000,
+    allowedHosts: "all",
+    client: {
+      overlay: true,
+    },
   },
   module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
+    rules: [{
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+    }, ],
   },
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "./src/assets"),
-          to: "./assets",
-        },
-      ],
+      patterns: [{
+        from: path.resolve(__dirname, "./src/assets"),
+        to: "./assets",
+      }, ],
     }),
     new HtmlWebpackPlugin({
       filename: "overview.html",
-      chunks: ["overview"],
       template: "./src/pages/overview/index.html",
     }),
     new HtmlWebpackPlugin({
       filename: "vaccinate.html",
-      chunks: ["vaccinate"],
       template: "./src/pages/vaccinate/index.html",
     }),
     new HtmlWebpackPlugin({
       filename: "dataTable.html",
-      chunks: ["dataTable"],
       template: "./src/pages/dataTable/index.html",
     }),
     new HtmlWebpackPlugin({
       filename: "measure.html",
-      chunks: ["measure"],
       template: "./src/pages/measure/index.html",
     }),
   ],

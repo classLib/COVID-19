@@ -86,6 +86,7 @@ export default class Bar {
       //x轴右，y轴下
       // .attr("class","axis")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
+
   }
   //1.4 绑定事件
   initSelectrEvents() {
@@ -304,12 +305,12 @@ export default class Bar {
 
       .call(
         d3
-          .axisBottom(this.x)
-          .tickSizeInner(`-${this.innerHeight}`)
-          .tickFormat((d) => {
-            let date = new Date(d);
-            return date.toLocaleDateString();
-          })
+        .axisBottom(this.x)
+        .tickSizeInner(`-${this.innerHeight}`)
+        .tickFormat((d) => {
+          let date = new Date(d);
+          return date.toLocaleDateString();
+        })
       )
       .call((g) => {
         g.selectAll("line").attr("stroke", "white");
@@ -329,11 +330,11 @@ export default class Bar {
     console.log(sumDateByTarge_);
     for (let i = 0; i < this.targetData.values.length; i++) {
       if (this.targetData.values[i].Country === name) {
-        return sumDateByTarge_ === 0
-          ? 0
-          : parseFloat(
-              +this.targetData.values[i][this.targetDataType] / sumDateByTarge_
-            );
+        return sumDateByTarge_ === 0 ?
+          0 :
+          parseFloat(
+            +this.targetData.values[i][this.targetDataType] / sumDateByTarge_
+          );
       }
     }
     return 0;

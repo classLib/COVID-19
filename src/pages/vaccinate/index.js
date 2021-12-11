@@ -8,17 +8,19 @@ import "./index.css";
 import RadioSet from "../../components/radio-set/radioSet.js";
 import Line from "../../components/line/line.js";
 
-import * as d3 from "d3";
-import { Chart } from "@antv/g2";
 import funnel from "../../components/funnel";
+import { createBoard } from "../../components/vaccines-board";
+import { select, csv, groups } from "d3";
 
 const initChart = async () => {
-  const pieAgeData = await d3.csv("/assets/data/vaccinations-by-age-group.csv");
+  const pieAgeData = await csv("/assets/data/vaccinations-by-age-group.csv");
+  const manufacturerData = await csv(
+    "/assets/data/vaccinations-by-manufacturer.csv"
+  );
+  const pieGroupData = groups(pieAgeData, (d) => d["location"]);
 
-  const pieGroupData = d3.groups(pieAgeData, (d) => d["location"]);
-
-  const vaccinationsData = await d3.csv("/assets/data/vaccinations.csv");
-  const groupData = d3.groups(vaccinationsData, (d) => d["location"]);
+  const vaccinationsData = await csv("/assets/data/vaccinations.csv");
+  const groupData = groups(vaccinationsData, (d) => d["location"]);
   let countrys = [];
   pieGroupData.forEach((d) => {
     countrys.push(d[0]);
@@ -30,7 +32,12 @@ const initChart = async () => {
     }
   });
   // 绘制单选框集合
-  let radioSet = new RadioSet("vaccines-left", filterData, pieGroupData);
+  let radioSet = new RadioSet(
+    "vaccines-left",
+    filterData,
+    pieGroupData,
+    manufacturerData
+  );
 
   // 绘制折线图
   let lineInitData = groupData[0];
@@ -40,9 +47,10 @@ const initChart = async () => {
   };
   let line = new Line("vaccines-center", lineData, pieGroupData);
   radioSet.setLine(line);
-  // 绘制表格
+
   // 绘制漏斗图
-  const dataByDate = d3.groups(pieGroupData[1][1], (d) => d["date"]);
+  const defaultContry = "Austria";
+  const dataByDate = groups(pieGroupData[0][1], (d) => d["date"]);
   let curDateData = dataByDate[dataByDate.length - 1][1];
   let data = [];
   curDateData.forEach((d) => {
@@ -62,6 +70,15 @@ const initChart = async () => {
   let funnelInstance = funnel(data);
   line.setFunnel(funnelInstance);
   radioSet.setFunnel(funnelInstance);
+
+  // 看板
+
+  const board = createBoard(
+    select("#vaccines-board"),
+    curDateData,
+    manufacturerData.filter((d) => d.location === defaultContry)
+  );
+  radioSet.setBoard(board);
 };
 
 window.onload = function () {

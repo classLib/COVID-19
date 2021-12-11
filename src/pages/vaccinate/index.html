@@ -60,16 +60,15 @@
     <main>
       <div class="container-fluid" id="vaccines-box">
         <div class="row mt-2">
-          <div class="col-2">
+          <div class="col-2 pe-0">
             <div class="chart-container">
-              <h4 style="text-align: center; height: 5vh; line-height: 5vh">
-                国家选择
-              </h4>
               <div
                 id="vaccines-left"
                 style="
                   overflow-y: scroll;
-                  height: 85vh;
+                  height: 90vh;
+                  width: 100%;
+                  padding: 8px;
                   border-top: 1px solid #eee;
                 "
               ></div>
@@ -89,8 +88,8 @@
             ></div>
             <div
               class="chart-container"
-              id="vaccines-table"
-              style="height: 44vh"
+              id="vaccines-board"
+              style="height: 44vh; overflow-y: scroll"
             ></div>
           </div>
         </div>

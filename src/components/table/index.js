@@ -1,15 +1,6 @@
 import "./index.css";
-import {
-  selectAll,
-  easeCubic as ease,
-  scaleLinear,
-  select,
-  csv,
-  groups,
-  sum,
-} from "d3";
+import { easeCubic as ease, select, csv, groups, sum } from "d3";
 import { createTableLine } from "../table-line";
-import { Position } from "@antv/attr";
 
 export async function createTable(selection) {
   selection.classed("border my-3 p-3", true);

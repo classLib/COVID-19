@@ -4,13 +4,13 @@
 此时我们选用的数据是最近这一周的数据，
 之后我根据进度条的时候来切换对应的图表，找出那个时间位于的区间，来绘制我们右边的图表.
 */
-import {Chart} from '@antv/g2';
+import { Chart } from "@antv/g2";
 export default function funnel(data) {
   data.sort(function (obj1, obj2) {
     return obj1.visitor - obj2.visitor;
   });
   const chart = new Chart({
-    container: 'vaccines-funnel',
+    container: "vaccines-funnel",
     autoFit: true,
     height: 600,
     padding: [30, 120, 55],
@@ -23,53 +23,59 @@ export default function funnel(data) {
     itemTpl:
       '<li class="g2-tooltip-list-item" data-index={index} style="margin-bottom:4px;">' +
       '<span style="background-color:{color};" class="g2-tooltip-marker"></span>' +
-      '{name}<br/>' +
+      "{name}<br/>" +
       '<span style="padding-left: 16px">{value}</span>' +
-      '</li>',
+      "</li>",
   });
 
-  chart.facet('mirror', {
-    fields: ['site'],
+  chart.facet("mirror", {
+    fields: ["site"],
     transpose: true,
     padding: 0,
     eachView(view, facet) {
       view
         .interval()
-        .position('action*visitor')
-        .color('action', ['#BAE7FF', '#69C0FF', '#40A9FF', '#1890FF', '#0050B3'])
-        .shape('funnel')
-        .tooltip('site*action*visitor', (site, action, visitor) => {
+        .position("action*visitor")
+        .color("action", [
+          "#BAE7FF",
+          "#69C0FF",
+          "#40A9FF",
+          "#1890FF",
+          "#0050B3",
+        ])
+        .shape("funnel")
+        .tooltip("site*action*visitor", (site, action, visitor) => {
           return {
             name: site,
-            value: action + ': ' + visitor,
+            value: action + ": " + visitor,
           };
         })
         .style({
           lineWidth: 1,
-          stroke: '#fff',
+          stroke: "#fff",
         })
         .animate({
           appear: {
-            animation: 'fade-in'
+            animation: "fade-in",
           },
           update: {
-            annotation: 'fade-in'
-          }
+            annotation: "fade-in",
+          },
         });
 
       data.map((obj) => {
         if (obj.site === facet.columnValue) {
           view.annotation().text({
             top: true,
-            position: [obj.action, 'min'],
+            position: [obj.action, "min"],
             content: obj.visitor,
             style: {
-              fill: '#fff',
+              fill: "#fff",
               stroke: null,
               fontSize: 12,
-              textAlign: facet.columnIndex ? 'start' : 'end',
+              textAlign: facet.columnIndex ? "start" : "end",
               shadowBlur: 2,
-              shadowColor: 'rgba(0, 0, 0, .45)',
+              shadowColor: "rgba(0, 0, 0, .45)",
             },
             offsetX: facet.columnIndex ? 10 : -10,
           });
@@ -78,8 +84,8 @@ export default function funnel(data) {
       });
     },
   });
-  chart.interaction('element-active');
-  chart.removeInteraction('legend-filter');
+  chart.interaction("element-active");
+  chart.removeInteraction("legend-filter");
   chart.render();
   return chart;
 }

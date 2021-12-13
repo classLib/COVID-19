@@ -9,8 +9,14 @@ import RadioSet from "../../components/radio-set/radioSet.js";
 import Line from "../../components/line/line.js";
 
 import funnel from "../../components/funnel";
-import { createBoard } from "../../components/vaccines-board";
-import { select, csv, groups } from "d3";
+import {
+  createBoard
+} from "../../components/vaccines-board";
+import {
+  select,
+  csv,
+  groups
+} from "d3";
 
 const initChart = async () => {
   const pieAgeData = await csv("/assets/data/vaccinations-by-age-group.csv");
@@ -54,19 +60,17 @@ const initChart = async () => {
   let curDateData = dataByDate[dataByDate.length - 1][1];
   let data = [];
   curDateData.forEach((d) => {
-    data.push(
-      {
-        action: d["age_group"],
-        visitor: d["people_fully_vaccinated_per_hundred"],
-        site: "fully_vaccinated",
-      },
-      {
-        action: d["age_group"],
-        visitor: d["people_vaccinated_per_hundred"],
-        site: "vaccinated",
-      }
-    );
+    data.push({ // 全部接种了（三针都打了才算）
+      action: d["age_group"],
+      visitor: d["people_fully_vaccinated_per_hundred"],
+      site: "fully_vaccinated",
+    }, { // 接种了（一针，两针，加强针任何一针都算）
+      action: d["age_group"],
+      visitor: d["people_vaccinated_per_hundred"],
+      site: "vaccinated",
+    });
   });
+  console.log(curDateData)
   let funnelInstance = funnel(data);
   line.setFunnel(funnelInstance);
   radioSet.setFunnel(funnelInstance);

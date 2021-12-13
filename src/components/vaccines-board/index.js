@@ -1,4 +1,7 @@
-import { groups, sum } from "d3";
+import {
+  groups,
+  sum
+} from "d3";
 
 class Board {
   constructor(selection, vData, manufacturerData) {
@@ -27,13 +30,14 @@ class Board {
       .append("div")
       .attr("id", "dose-data");
   }
-
+  // 求取每一个每一百人下面的所有年龄段之和，那就是每多少个一百人下面的对应的完全接种和部分接种
   tansformData() {
-    this.people_vaccinated_per_hundred = sum(
+    this.people_vaccinated_per_hundred = this.sumData = sum(
       this._vData,
       (d) => d.people_vaccinated_per_hundred
     );
-
+    console.log(this._vData)
+    this.count = this._vData.length;
     this.people_fully_vaccinated_per_hundred = sum(
       this._vData,
       (d) => d.people_fully_vaccinated_per_hundred
@@ -54,24 +58,18 @@ class Board {
     const vRows = this._vDataContainer
       .selectAll("div")
       .data(
-        [
-          {
-            title: "Complete inoculation",
+        [{
+            // 接种方案规定的所有剂量
+            title: "people_fully_vaccinated" + '    /    ' + `${ this.count * 100}`,
             value: this.people_fully_vaccinated_per_hundred,
             color: "#008000",
           },
           {
-            title: "Partial inoculation",
+            // 至少接种一针的比例
+            title: "people_vaccinated" + '    /    ' + `${ this.count * 100}`,
             value: this.people_vaccinated_per_hundred,
             color: "#4395FF",
-          },
-          {
-            title: "Total vaccinations",
-            value:
-              this.people_fully_vaccinated_per_hundred +
-              this.people_vaccinated_per_hundred,
-            color: "#9195A3",
-          },
+          }
         ],
         (d) => d.title
       )
@@ -82,9 +80,14 @@ class Board {
     vRows
       .selectAll("div")
       .data((d) => {
-        return [
-          { text: d.title, color: "#212121" },
-          { text: d.value.toFixed(2), color: d.color },
+        return [{
+            text: d.title,
+            color: "#212121"
+          },
+          {
+            text: d.value.toFixed(2),
+            color: d.color
+          },
         ];
       })
       .join("div")
@@ -113,9 +116,14 @@ class Board {
     mRows
       .selectAll("div")
       .data((d) => {
-        return [
-          { text: d.vaccine, color: "#212121" },
-          { text: d.total_vaccinations, color: "#212121" },
+        return [{
+            text: d.vaccine,
+            color: "#212121"
+          },
+          {
+            text: d.total_vaccinations,
+            color: "#212121"
+          },
         ];
       })
       .join("div")
